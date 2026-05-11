@@ -9,7 +9,7 @@
         </div>
 
         <h1 class="hero-title">
-          ប្រព័ន្ធរៀនពន្ធខ្មែរ
+          ប្រព័ន្ធនិយាយអំពីពន្ធខ្មែរ
           <span class="gradient-highlight">ឈានមុខគេ</span>
         </h1>
 
@@ -21,22 +21,6 @@
           <button class="btn btn-primary" @click="goToCalculator">
             <span>🚀</span> ចាប់ផ្ដើម
           </button>
-        </div>
-
-        <!-- Stats -->
-        <div class="hero-stats">
-          <div class="stat">
-            <div class="stat-number">50K+</div>
-            <div class="stat-label">អ្នកសិក្សា</div>
-          </div>
-          <div class="stat">
-            <div class="stat-number">15+</div>
-            <div class="stat-label">មេរៀន</div>
-          </div>
-          <div class="stat">
-            <div class="stat-number">100%</div>
-            <div class="stat-label">ឥតគិតថ្លៃ</div>
-          </div>
         </div>
       </div>
 
@@ -227,34 +211,6 @@ const goToCalculator = () => {
 .btn-secondary:hover {
   background: rgba(15, 118, 110, 0.05);
   transform: translateY(-4px);
-}
-
-/* Stats */
-.hero-stats {
-  display: flex;
-  gap: 40px;
-  animation: slideInLeft 0.6s ease 0.4s both;
-}
-
-.stat {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.stat-number {
-  font-size: 32px;
-  font-weight: 900;
-  background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.stat-label {
-  font-size: 13px;
-  color: #64748b;
-  font-weight: 600;
 }
 
 /* Right Illustration */
