@@ -59,7 +59,7 @@ const taxTypes = [
     title: 'VAT',
     khmerTitle: 'អាករលើតម្លៃបន្ថែម',
     description: 'អាករលើតម្លៃបន្ថែមអនុវត្តលើទំនិញ និងសេវាកម្ម។ អាជីវកម្មចុះបញ្ជីត្រូវគិត VAT លើការលក់ និងដាក់ប្រកាសជាប្រចាំ។',
-    rate: '10% / 5% / 0%',
+    rate: '10% / 0%',
     appliesTo: 'ទំនិញ និងសេវាកម្ម',
     path: '/tax-types/vat'
   },
@@ -68,7 +68,7 @@ const taxTypes = [
     title: 'Salary Tax',
     khmerTitle: 'ពន្ធលើប្រាក់បៀវត្ស',
     description: 'ពន្ធលើប្រាក់បៀវត្សគិតលើប្រាក់ខែបុគ្គលិក។ និយោជកត្រូវកាត់ទុក និងបង់ពន្ធជំនួសបុគ្គលិកតាមច្បាប់។',
-    rate: '20% (តាមលក្ខខណ្ឌ)',
+    rate: '0% - 20%',
     appliesTo: 'ប្រាក់ខែ និងប្រាក់ឈ្នួល',
     path: '/tax-types/salary'
   },
@@ -77,18 +77,36 @@ const taxTypes = [
     title: 'Prepayment Tax',
     khmerTitle: 'ពន្ធបង់ជាមុន',
     description: 'អាជីវកម្មខ្លះត្រូវបង់ពន្ធជាមុនលើចំណូល ដើម្បីធានាការបង់ពន្ធទាន់ពេល និងត្រឹមត្រូវ។',
-    rate: '1% - 1.5%',
+    rate: '1%',
     appliesTo: 'ចំណូលអាជីវកម្ម',
     path: '/tax-types/prepayment'
+  },
+  {
+    icon: '✂️',
+    title: 'Withholding Tax',
+    khmerTitle: 'ពន្ធកាត់ទុក',
+    description: 'ពន្ធកាត់ទុកអនុវត្តពេលទូទាត់សេវា សួយសារ ការប្រាក់ ឬថ្លៃជួល។ អ្នកបង់ប្រាក់មានភារកិច្ចកាត់ទុក និងបង់ជូនពន្ធដារ។',
+    rate: '4% / 6% / 10% / 14% / 15%',
+    appliesTo: 'ការទូទាត់ជាក់លាក់',
+    path: '/tax-types/withholding'
   },
   {
     icon: '💡',
     title: 'Public Lighting Tax',
     khmerTitle: 'ពន្ធភ្លើងសាធារណៈ',
     description: 'ពន្ធនេះគាំទ្រការថែទាំប្រព័ន្ធភ្លើងសាធារណៈ និងហេដ្ឋារចនាសម្ព័ន្ធពាក់ព័ន្ធ។',
-    rate: '0.5% - 1%',
-    appliesTo: 'ទ្រព្យសម្បត្តិ និងសកម្មភាពពាណិជ្ជកម្មខ្លះ',
+    rate: '5%',
+    appliesTo: 'ស្រា ស្រាបៀរ បារី',
     path: '/tax-types/public-lighting'
+  },
+  {
+    icon: '🏷️',
+    title: 'Specific Tax',
+    khmerTitle: 'អាករពិសេស',
+    description: 'អាករពិសេសយកលើទំនិញ និងសេវាមានលក្ខណៈជាក់លាក់ ដូចជា ស្រា ស្រាបៀរ បារី ភេសជ្ជៈ ស៊ីម៉ង់ត៍ និងសេវាខ្លះ។',
+    rate: '3% - 35%',
+    appliesTo: 'ទំនិញ និងសេវាជាក់លាក់',
+    path: '/tax-types/specific'
   },
   {
     icon: '🏢',
@@ -98,6 +116,51 @@ const taxTypes = [
     rate: '20% / 9%',
     appliesTo: 'ប្រាក់ចំណេញសុទ្ធ',
     path: '/tax-types/business'
+  },
+  {
+    icon: '🧾',
+    title: 'Patent Tax',
+    khmerTitle: 'ពន្ធប៉ាតង់',
+    description: 'ពន្ធប៉ាតង់ជាពន្ធអាជ្ញាបណ្ណអាជីវកម្មប្រចាំឆ្នាំ ដែលត្រូវបង់តាមប្រភេទអ្នកជាប់ពន្ធ និងកាលកំណត់ច្បាប់។',
+    rate: '400,000៛ - 5,000,000៛',
+    appliesTo: 'អាជីវកម្មចុះបញ្ជី',
+    path: '/tax-types/patent'
+  },
+  {
+    icon: '🏠',
+    title: 'Property Tax',
+    khmerTitle: 'ពន្ធលើអចលនទ្រព្យ',
+    description: 'ពន្ធប្រចាំឆ្នាំលើអចលនទ្រព្យ (ដី និងអគារ) គិតតាមតម្លៃជាប់ពន្ធបន្ទាប់ពីកាត់លើកលែង។',
+    rate: '0.1%',
+    appliesTo: 'ដី និងអគារ',
+    path: '/tax-types/property'
+  },
+  {
+    icon: '🌾',
+    title: 'Unused Land Tax',
+    khmerTitle: 'ពន្ធលើដីមិនប្រើប្រាស់',
+    description: 'ពន្ធលើដីដែលមិនប្រើប្រាស់ ឬមិនអភិវឌ្ឍ ក្នុងតំបន់ដែលច្បាប់កំណត់ ដើម្បីលើកទឹកចិត្តការប្រើប្រាស់ដីមានប្រសិទ្ធភាព។',
+    rate: 'អាស្រ័យតំបន់',
+    appliesTo: 'ដីមិនប្រើប្រាស់',
+    path: '/tax-types/unused-land'
+  },
+  {
+    icon: '📜',
+    title: 'Registration Tax',
+    khmerTitle: 'ពន្ធប្រថាប់ត្រា',
+    description: 'ពន្ធប្រថាប់ត្រាគិតលើការផ្ទេរកម្មសិទ្ធិអចលនទ្រព្យ យានយន្ត ភាគហ៊ុន និងប្រតិបត្តិការជាក់លាក់។',
+    rate: '4% (ទូទៅ)',
+    appliesTo: 'ការផ្ទេរកម្មសិទ្ធិ',
+    path: '/tax-types/registration'
+  },
+  {
+    icon: '🏨',
+    title: 'Accommodation Tax',
+    khmerTitle: 'អាករលើការស្នាក់នៅ',
+    description: 'អាករលើការស្នាក់នៅអនុវត្តលើសេវាស្នាក់នៅក្នុងសណ្ឋាគារ និងមូលដ្ឋានស្នាក់នៅជាប់ពន្ធ។',
+    rate: '2%',
+    appliesTo: 'សេវាស្នាក់នៅ',
+    path: '/tax-types/accommodation'
   },
   {
     icon: '📋',

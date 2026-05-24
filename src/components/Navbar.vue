@@ -22,8 +22,15 @@
             <li><RouterLink to="/tax-types/vat">អាករលើតម្លៃបន្ថែម (VAT)</RouterLink></li>
             <li><RouterLink to="/tax-types/salary">ពន្ធលើប្រាក់បៀវត្ស</RouterLink></li>
             <li><RouterLink to="/tax-types/prepayment">ពន្ធបង់ជាមុន</RouterLink></li>
+            <li><RouterLink to="/tax-types/withholding">ពន្ធកាត់ទុក</RouterLink></li>
             <li><RouterLink to="/tax-types/public-lighting">ពន្ធភ្លើងសាធារណៈ</RouterLink></li>
+            <li><RouterLink to="/tax-types/specific">អាករពិសេស</RouterLink></li>
             <li><RouterLink to="/tax-types/business">ពន្ធលើប្រាក់ចំណូល</RouterLink></li>
+            <li><RouterLink to="/tax-types/patent">ពន្ធប៉ាតង់</RouterLink></li>
+            <li><RouterLink to="/tax-types/property">ពន្ធលើអចលនទ្រព្យ</RouterLink></li>
+            <li><RouterLink to="/tax-types/unused-land">ពន្ធលើដីមិនប្រើប្រាស់</RouterLink></li>
+            <li><RouterLink to="/tax-types/registration">ពន្ធប្រថាប់ត្រា</RouterLink></li>
+            <li><RouterLink to="/tax-types/accommodation">អាករលើការស្នាក់នៅ</RouterLink></li>
             <li><RouterLink to="/tax-types/general">ពន្ធទូទៅ</RouterLink></li>
           </ul>
         </li>

@@ -1,0 +1,15 @@
+<template>
+  <div class="page"><Navbar /><section class="wrap"><div class="box">
+    <h1>ម៉ាស៊ីនគណនាពន្ធប្រថាប់ត្រា</h1>
+    <p class="intro">គណនាពន្ធ 4% បន្ទាប់ពីកាត់អនុគ្រោះ (បើមាន)។</p>
+    <div class="form-grid">
+      <div><label>ប្រភេទទ្រព្យ</label><select v-model="asset"><option value="immovable">អចលនទ្រព្យ</option><option value="vehicle">យានយន្ត</option><option value="shares">ភាគហ៊ុន/ផ្សេងៗ</option></select><p class="help">ជ្រើសប្រភេទដើម្បីឲ្យការគណនាត្រឹមត្រូវតាមករណី។</p></div>
+      <div><label>តម្លៃជាប់ពន្ធដើម</label><input v-model.number="value" type="number" placeholder="បញ្ចូលតម្លៃជាប់ពន្ធ"/><p class="help">បញ្ចូលតម្លៃមូលដ្ឋានមុនកាត់អនុគ្រោះ។</p></div>
+      <div><label>មានអនុគ្រោះក្នុងរង្វង់ញាតិ?</label><select v-model="reliefType"><option value="none">គ្មាន</option><option value="family">មាន</option></select><p class="help">បើមាន សូមបញ្ចូលទឹកប្រាក់កាត់ចេញខាងក្រោម។</p></div>
+      <div v-if="reliefType==='family'"><label>ទឹកប្រាក់កាត់ចេញ</label><input v-model.number="relief" type="number" placeholder="បញ្ចូលទឹកប្រាក់កាត់ចេញ"/><p class="help">ទឹកប្រាក់នេះនឹងកាត់ចេញពីមូលដ្ឋានគិតពន្ធ។</p></div>
+    </div>
+    <div class="result"><div>មូលដ្ឋានក្រោយកាត់: <strong>{{ base.toFixed(2) }}</strong></div><div>ពន្ធ (4%): <strong>{{ tax.toFixed(2) }}</strong></div></div>
+  </div></section><FooterSection /></div>
+</template>
+<script setup lang="ts">import { computed, ref } from 'vue';import Navbar from '@/components/Navbar.vue';import FooterSection from '@/components/FooterSection.vue';const asset=ref('immovable');const value=ref(0);const reliefType=ref('none');const relief=ref(0);const base=computed(()=>Math.max(0,value.value-(reliefType.value==='family'?relief.value:0)));const tax=computed(()=>base.value*0.04);</script>
+<style scoped>.wrap{padding:40px 20px}.box{max-width:960px;margin:auto;display:grid;gap:14px}.intro{color:#475569}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{font-weight:700;color:#0f766e}input,select{padding:10px;border:1px solid #99d8cf;border-radius:8px}.help{font-size:12px;color:#64748b;margin:6px 0 0}.result{background:#ecfeff;padding:14px;border-radius:10px;display:grid;gap:6px}@media(max-width:800px){.form-grid{grid-template-columns:1fr}}</style>
