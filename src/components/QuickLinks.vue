@@ -7,7 +7,7 @@
       <div class="links-grid">
         <!-- VAT Card -->
         <div class="quick-link-card" :class="{ active: activeCard === 0 }" @click="activeCard = 0">
-          <div class="card-icon">💵</div>
+          <div class="card-icon"><HandCoins /></div>
           <h3>អាករលើតម្លៃបន្ថែម</h3>
           <p>រៀនអំពីពន្ធលើតម្លៃបន្ថែម ការគណនា និងវិធាននីតិប្បញ្ញត្តិ</p>
           <div class="card-link">ស្វាគមន៍ →</div>
@@ -15,7 +15,7 @@
 
         <!-- Salary Tax Card -->
         <div class="quick-link-card" :class="{ active: activeCard === 1 }" @click="activeCard = 1">
-          <div class="card-icon">💼</div>
+          <div class="card-icon"><BriefcaseBusiness /></div>
           <h3>ពន្ធលើប្រាក់បៀវត្ស</h3>
           <p>ស្វាគមន៍ការគណនាពន្ធលើប្រាក់បៀវត្សនិងច្បាប់ពន្ធនៅកម្ពុជា</p>
           <div class="card-link">ស្វាគមន៍ →</div>
@@ -23,7 +23,7 @@
 
         <!-- Calculator Card -->
         <div class="quick-link-card" :class="{ active: activeCard === 2 }" @click="activeCard = 2">
-          <div class="card-icon">🧮</div>
+          <div class="card-icon"><Calculator /></div>
           <h3>គណនាពន្ធលឿន</h3>
           <p>ប្រើប្រាស់ឧបករណ៍គណនាពន្ធឯកទៃរបស់យើងដោយឥតគិតថ្លៃ</p>
           <div class="card-link">ចាប់ផ្ដើម →</div>
@@ -31,7 +31,7 @@
 
         <!-- News Card -->
         <div class="quick-link-card" :class="{ active: activeCard === 3 }" @click="activeCard = 3">
-          <div class="card-icon">📰</div>
+          <div class="card-icon"><Newspaper /></div>
           <h3>ព័ត៌មានពន្ធ</h3>
           <p>ស្វាគមន៍ព័ត៌មាននិងលទ្ធផលកម្ពុជាលក្ខណ៍ពន្ធថ្មីបំផុត</p>
           <div class="card-link">ស្វាគមន៍ →</div>
@@ -39,7 +39,7 @@
 
         <!-- Documents Card -->
         <div class="quick-link-card" :class="{ active: activeCard === 4 }" @click="activeCard = 4">
-          <div class="card-icon">📄</div>
+          <div class="card-icon"><FileText /></div>
           <h3>ឯកសារពន្ធ</h3>
           <p>ទាញយកឯកសារច្បាប់ពន្ធ ឧបករណ៍ និងគំរូពីមន្ទីរពន្ធ</p>
           <div class="card-link">ស្វាគមន៍ →</div>
@@ -47,7 +47,7 @@
 
         <!-- FAQ Card -->
         <div class="quick-link-card" :class="{ active: activeCard === 5 }" @click="activeCard = 5">
-          <div class="card-icon">❓</div>
+          <div class="card-icon"><CircleHelp /></div>
           <h3>សំណួរ និងឆ្លើយ</h3>
           <p>ស្វាគមន៍ស្វែងយល់ពីសំណួរដែលគេសួរច្រើនបំផុត</p>
           <div class="card-link">ស្វាគមន៍ →</div>
@@ -58,6 +58,7 @@
 </template>
 
 <script setup lang="ts">
+import { BriefcaseBusiness, Calculator, CircleHelp, FileText, HandCoins, Newspaper } from 'lucide-vue-next'
 import { ref } from 'vue'
 
 const activeCard = ref(0)
@@ -134,10 +135,17 @@ const activeCard = ref(0)
 }
 
 .card-icon {
-  font-size: 42px;
+  width: 42px;
+  height: 42px;
   margin-bottom: 16px;
   display: inline-block;
   animation: float 3s ease-in-out infinite;
+  color: #0f766e;
+}
+
+.card-icon :deep(svg) {
+  width: 100%;
+  height: 100%;
 }
 
 .quick-link-card:hover .card-icon {

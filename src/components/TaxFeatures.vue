@@ -8,7 +8,7 @@
 
       <div class="features-grid">
         <div v-for="(feature, index) in features" :key="index" class="feature-card">
-          <div class="feature-icon">{{ feature.icon }}</div>
+          <div class="feature-icon"><component :is="feature.icon" /></div>
           <h3>{{ feature.title }}</h3>
           <p class="khmer-title">{{ feature.khmerTitle }}</p>
           <p class="description">{{ feature.description }}</p>
@@ -82,9 +82,11 @@
 </template>
 
 <script setup lang="ts">
+import { BookOpenText, ChartColumn, FileText, GraduationCap, PencilLine, Scale } from 'lucide-vue-next'
+
 const features = [
   {
-    icon: '📖',
+    icon: BookOpenText,
     title: 'Tax Definitions',
     khmerTitle: 'និយមន័យពន្ធ',
     description: 'Complete glossary of tax terminology and key concepts used in Cambodian taxation.',
@@ -99,7 +101,7 @@ const features = [
     buttonText: 'View Definitions'
   },
   {
-    icon: '⚖️',
+    icon: Scale,
     title: 'Tax Law Basics',
     khmerTitle: 'មូលដ្ឋានច្បាប់ពន្ធ',
     description: 'Essential information about Cambodian tax laws, regulations, and compliance requirements.',
@@ -114,7 +116,7 @@ const features = [
     buttonText: 'Learn Tax Law'
   },
   {
-    icon: '📊',
+    icon: ChartColumn,
     title: 'Tax Examples',
     khmerTitle: 'ឧទាហរណ៍ពន្ធ',
     description: 'Real-world examples showing how to calculate taxes in various scenarios.',
@@ -129,7 +131,7 @@ const features = [
     buttonText: 'See Examples'
   },
   {
-    icon: '✏️',
+    icon: PencilLine,
     title: 'Tax Exercises',
     khmerTitle: 'លេខលំហាត់ពន្ធ',
     description: 'Practice problems with step-by-step solutions to reinforce your understanding.',
@@ -144,7 +146,7 @@ const features = [
     buttonText: 'Start Practicing'
   },
   {
-    icon: '📄',
+    icon: FileText,
     title: 'Tax Documents',
     khmerTitle: 'ឯកសារពន្ធ',
     description: 'Official government documents, forms, and templates for tax filing and reporting.',
@@ -159,7 +161,7 @@ const features = [
     buttonText: 'Download Forms'
   },
   {
-    icon: '🎓',
+    icon: GraduationCap,
     title: 'Learning Materials',
     khmerTitle: 'សម្ភារៈសិក្សា',
     description: 'Comprehensive study guides, presentations, and resources for deeper learning.',
@@ -249,9 +251,16 @@ const features = [
 }
 
 .feature-icon {
-  font-size: 48px;
+  width: 48px;
+  height: 48px;
   margin-bottom: 15px;
   display: inline-block;
+  color: #0f766e;
+}
+
+.feature-icon :deep(svg) {
+  width: 100%;
+  height: 100%;
 }
 
 .feature-card h3 {

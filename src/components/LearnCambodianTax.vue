@@ -15,7 +15,7 @@
           @mouseleave="activeTaxCard = -1"
         >
           <div class="card-header">
-            <div class="tax-icon">{{ tax.icon }}</div>
+            <div class="tax-icon"><component :is="tax.icon" /></div>
             <div class="card-number">{{ String(index + 1).padStart(2, '0') }}</div>
           </div>
 
@@ -43,6 +43,21 @@
 </template>
 
 <script setup lang="ts">
+import {
+  Building2,
+  ClipboardList,
+  House,
+  Hotel,
+  Hourglass,
+  Lightbulb,
+  Package,
+  Receipt,
+  ScrollText,
+  Scissors,
+  Tags,
+  Wallet,
+  Wheat,
+} from 'lucide-vue-next'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -55,7 +70,7 @@ const goToDetail = (path: string) => {
 
 const taxTypes = [
   {
-    icon: '📦',
+    icon: Package,
     title: 'VAT',
     khmerTitle: 'អាករលើតម្លៃបន្ថែម',
     description: 'អាករលើតម្លៃបន្ថែមអនុវត្តលើទំនិញ និងសេវាកម្ម។ អាជីវកម្មចុះបញ្ជីត្រូវគិត VAT លើការលក់ និងដាក់ប្រកាសជាប្រចាំ។',
@@ -64,7 +79,7 @@ const taxTypes = [
     path: '/tax-types/vat'
   },
   {
-    icon: '💰',
+    icon: Wallet,
     title: 'Salary Tax',
     khmerTitle: 'ពន្ធលើប្រាក់បៀវត្ស',
     description: 'ពន្ធលើប្រាក់បៀវត្សគិតលើប្រាក់ខែបុគ្គលិក។ និយោជកត្រូវកាត់ទុក និងបង់ពន្ធជំនួសបុគ្គលិកតាមច្បាប់។',
@@ -73,7 +88,7 @@ const taxTypes = [
     path: '/tax-types/salary'
   },
   {
-    icon: '⏳',
+    icon: Hourglass,
     title: 'Prepayment Tax',
     khmerTitle: 'ពន្ធបង់ជាមុន',
     description: 'អាជីវកម្មខ្លះត្រូវបង់ពន្ធជាមុនលើចំណូល ដើម្បីធានាការបង់ពន្ធទាន់ពេល និងត្រឹមត្រូវ។',
@@ -82,7 +97,7 @@ const taxTypes = [
     path: '/tax-types/prepayment'
   },
   {
-    icon: '✂️',
+    icon: Scissors,
     title: 'Withholding Tax',
     khmerTitle: 'ពន្ធកាត់ទុក',
     description: 'ពន្ធកាត់ទុកអនុវត្តពេលទូទាត់សេវា សួយសារ ការប្រាក់ ឬថ្លៃជួល។ អ្នកបង់ប្រាក់មានភារកិច្ចកាត់ទុក និងបង់ជូនពន្ធដារ។',
@@ -91,7 +106,7 @@ const taxTypes = [
     path: '/tax-types/withholding'
   },
   {
-    icon: '💡',
+    icon: Lightbulb,
     title: 'Public Lighting Tax',
     khmerTitle: 'ពន្ធភ្លើងសាធារណៈ',
     description: 'ពន្ធនេះគាំទ្រការថែទាំប្រព័ន្ធភ្លើងសាធារណៈ និងហេដ្ឋារចនាសម្ព័ន្ធពាក់ព័ន្ធ។',
@@ -100,7 +115,7 @@ const taxTypes = [
     path: '/tax-types/public-lighting'
   },
   {
-    icon: '🏷️',
+    icon: Tags,
     title: 'Specific Tax',
     khmerTitle: 'អាករពិសេស',
     description: 'អាករពិសេសយកលើទំនិញ និងសេវាមានលក្ខណៈជាក់លាក់ ដូចជា ស្រា ស្រាបៀរ បារី ភេសជ្ជៈ ស៊ីម៉ង់ត៍ និងសេវាខ្លះ។',
@@ -109,7 +124,7 @@ const taxTypes = [
     path: '/tax-types/specific'
   },
   {
-    icon: '🏢',
+    icon: Building2,
     title: 'Business Income Tax',
     khmerTitle: 'ពន្ធលើប្រាក់ចំណូលអាជីវកម្ម',
     description: 'អាជីវកម្មត្រូវបង់ពន្ធលើប្រាក់ចំណេញសុទ្ធ បន្ទាប់ពីដកចំណាយអនុញ្ញាត។',
@@ -118,7 +133,7 @@ const taxTypes = [
     path: '/tax-types/business'
   },
   {
-    icon: '🧾',
+    icon: Receipt,
     title: 'Patent Tax',
     khmerTitle: 'ពន្ធប៉ាតង់',
     description: 'ពន្ធប៉ាតង់ជាពន្ធអាជ្ញាបណ្ណអាជីវកម្មប្រចាំឆ្នាំ ដែលត្រូវបង់តាមប្រភេទអ្នកជាប់ពន្ធ និងកាលកំណត់ច្បាប់។',
@@ -127,7 +142,7 @@ const taxTypes = [
     path: '/tax-types/patent'
   },
   {
-    icon: '🏠',
+    icon: House,
     title: 'Property Tax',
     khmerTitle: 'ពន្ធលើអចលនទ្រព្យ',
     description: 'ពន្ធប្រចាំឆ្នាំលើអចលនទ្រព្យ (ដី និងអគារ) គិតតាមតម្លៃជាប់ពន្ធបន្ទាប់ពីកាត់លើកលែង។',
@@ -136,7 +151,7 @@ const taxTypes = [
     path: '/tax-types/property'
   },
   {
-    icon: '🌾',
+    icon: Wheat,
     title: 'Unused Land Tax',
     khmerTitle: 'ពន្ធលើដីមិនប្រើប្រាស់',
     description: 'ពន្ធលើដីដែលមិនប្រើប្រាស់ ឬមិនអភិវឌ្ឍ ក្នុងតំបន់ដែលច្បាប់កំណត់ ដើម្បីលើកទឹកចិត្តការប្រើប្រាស់ដីមានប្រសិទ្ធភាព។',
@@ -145,7 +160,7 @@ const taxTypes = [
     path: '/tax-types/unused-land'
   },
   {
-    icon: '📜',
+    icon: ScrollText,
     title: 'Registration Tax',
     khmerTitle: 'ពន្ធប្រថាប់ត្រា',
     description: 'ពន្ធប្រថាប់ត្រាគិតលើការផ្ទេរកម្មសិទ្ធិអចលនទ្រព្យ យានយន្ត ភាគហ៊ុន និងប្រតិបត្តិការជាក់លាក់។',
@@ -154,7 +169,7 @@ const taxTypes = [
     path: '/tax-types/registration'
   },
   {
-    icon: '🏨',
+    icon: Hotel,
     title: 'Accommodation Tax',
     khmerTitle: 'អាករលើការស្នាក់នៅ',
     description: 'អាករលើការស្នាក់នៅអនុវត្តលើសេវាស្នាក់នៅក្នុងសណ្ឋាគារ និងមូលដ្ឋានស្នាក់នៅជាប់ពន្ធ។',
@@ -163,7 +178,7 @@ const taxTypes = [
     path: '/tax-types/accommodation'
   },
   {
-    icon: '📋',
+    icon: ClipboardList,
     title: 'General Taxation',
     khmerTitle: 'ពន្ធទូទៅ',
     description: 'ក្របខណ្ឌពន្ធទូទៅរួមបញ្ចូលប្រភេទពន្ធជាច្រើនដែលពាក់ព័ន្ធនឹងបុគ្គល និងអាជីវកម្ម។',
@@ -186,7 +201,8 @@ const taxTypes = [
 .card-highlight { position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #0f766e 0%, #14b8a6 100%); transform: scaleX(0); transition: transform 0.3s ease; }
 .tax-card:hover .card-highlight { transform: scaleX(1); }
 .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.tax-icon { font-size: 48px; }
+.tax-icon { width: 48px; height: 48px; color: #0f766e; }
+.tax-icon :deep(svg) { width: 100%; height: 100%; }
 .card-number { font-size: 32px; font-weight: 900; color: rgba(15, 118, 110, 0.1); }
 .tax-card h3 { font-size: 24px; font-weight: 800; color: #0f766e; margin-bottom: 5px; }
 .khmer-title { font-size: 14px; color: #14b8a6; font-weight: 600; margin-bottom: 15px; }

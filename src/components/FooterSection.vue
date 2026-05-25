@@ -3,7 +3,7 @@
     <div class="footer-content">
       <div class="footer-section">
         <div class="footer-logo">
-          <span>💰</span>
+          <Wallet class="footer-logo-icon" />
           <span>ពន្ធខ្មែរ</span>
         </div>
         <p class="footer-desc">
@@ -37,6 +37,10 @@
     </div>
   </footer>
 </template>
+
+<script setup lang="ts">
+import { Wallet } from 'lucide-vue-next'
+</script>
 
 <style scoped>
 .footer {
@@ -72,6 +76,11 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.footer-logo-icon {
+  width: 24px;
+  height: 24px;
 }
 
 .footer-desc {

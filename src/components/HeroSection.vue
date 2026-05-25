@@ -4,7 +4,7 @@
       <!-- Left Content -->
       <div class="hero-left">
         <div class="hero-badge">
-          <span class="badge-icon">🎓</span>
+          <GraduationCap class="badge-icon" />
           វេទិការៀនពន្ធឌីជីថល
         </div>
 
@@ -19,7 +19,7 @@
 
         <div class="hero-buttons">
           <button class="btn btn-primary" @click="goToCalculator">
-            <span>🚀</span> ចាប់ផ្ដើម
+            <Rocket class="btn-icon" /> ចាប់ផ្ដើម
           </button>
         </div>
       </div>
@@ -48,7 +48,7 @@
             ល្អ
           </div>
           <div class="float-card float-2">
-            <span>📊</span>
+            <BarChart3 class="float-icon" />
             ស្ថិតិ
           </div>
         </div>
@@ -58,6 +58,7 @@
 </template>
 
 <script setup lang="ts">
+import { BarChart3, GraduationCap, Rocket } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -136,7 +137,8 @@ const goToCalculator = () => {
 }
 
 .badge-icon {
-  font-size: 18px;
+  width: 18px;
+  height: 18px;
   animation: bounce 2s ease-in-out infinite;
 }
 
@@ -188,6 +190,11 @@ const goToCalculator = () => {
   align-items: center;
   gap: 8px;
   border: none;
+}
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
 }
 
 .btn-primary {
@@ -333,6 +340,11 @@ const goToCalculator = () => {
   gap: 8px;
   border: 1px solid rgba(20, 184, 166, 0.15);
   animation: floatCard 3s ease-in-out infinite;
+}
+
+.float-icon {
+  width: 16px;
+  height: 16px;
 }
 
 @keyframes floatCard {

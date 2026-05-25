@@ -12,14 +12,14 @@
           :class="{ active: activeTab === 'news' }" 
           @click="activeTab = 'news'"
         >
-          📰 ព័ត៌មាន
+          <Newspaper class="inline-icon" /> ព័ត៌មាន
         </button>
         <button 
           class="tab-button" 
           :class="{ active: activeTab === 'announcement' }" 
           @click="activeTab = 'announcement'"
         >
-          📢 ប្រកាសលម្អិត
+          <Megaphone class="inline-icon" /> ប្រកាសលម្អិត
         </button>
       </div>
 
@@ -53,7 +53,7 @@
           <p>{{ item.content }}</p>
 
           <div class="announcement-meta">
-            <span class="announce-date">📅 {{ item.date }}</span>
+            <span class="announce-date"><CalendarDays class="inline-icon" /> {{ item.date }}</span>
             <a href="#" class="view-detail">មើលលម្អិត →</a>
           </div>
         </div>
@@ -64,6 +64,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { CalendarDays, Megaphone, Newspaper } from 'lucide-vue-next'
 
 const activeTab = ref<'news' | 'announcement'>('news')
 
@@ -102,14 +103,14 @@ const announcements = ref([
     id: 1,
     title: 'ការផ្លាស់ប្តូរលម្អិតលម្អិតលម្អិត',
     content: 'ផ្នែកលម្អិតលម្អិតលម្អិតលម្អិតលម្អិតលម្អិត លម្អិតលម្អិតលម្អិតលម្អិត។',
-    priority: '⚠️ ខ្ពស់',
+    priority: 'ខ្ពស់',
     date: '២៣ មេ ២០២៦',
   },
   {
     id: 2,
     title: 'ពិគ្គមាលម្អិតលម្អិតលម្អិត',
     content: 'សូមស្វាគមន៍លម្អិតលម្អិតលម្អិតលម្អិតលម្អិតលម្អិត លម្អិតលម្អិត។',
-    priority: '✓ ធម្មតា',
+    priority: 'ធម្មតា',
     date: '២០ មេ ២០២៦',
   },
 ])
@@ -160,6 +161,14 @@ const announcements = ref([
   font-size: 16px;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.inline-icon {
+  width: 16px;
+  height: 16px;
 }
 
 .tab-button:hover {
@@ -342,6 +351,9 @@ const announcements = ref([
 }
 
 .announce-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 12px;
   color: #94a3b8;
 }

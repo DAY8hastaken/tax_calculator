@@ -15,7 +15,7 @@
             :class="{ active: activeTab === tab.id }"
             @click="activeTab = tab.id"
           >
-            <span class="tab-icon">{{ tab.icon }}</span>
+            <span class="tab-icon"><component :is="tab.icon" /></span>
             {{ tab.label }}
             <span class="tab-count">({{ getTabCount(tab.id) }})</span>
           </button>
@@ -36,7 +36,7 @@
               <p class="excerpt">{{ news.excerpt }}</p>
 
               <div class="card-meta">
-                <span class="read-time">📖 {{ news.readTime }} min read</span>
+                <span class="read-time"><BookText class="inline-icon" /> {{ news.readTime }} min read</span>
                 <button class="read-more-btn">Read Full Article →</button>
               </div>
             </div>
@@ -58,14 +58,14 @@
 
               <div class="announcement-actions">
                 <button class="action-btn">View Details →</button>
-                <span v-if="announcement.document" class="doc-link">📄 {{ announcement.document }}</span>
+                <span v-if="announcement.document" class="doc-link"><FileText class="inline-icon" /> {{ announcement.document }}</span>
               </div>
             </div>
           </template>
 
           <template v-if="activeTab === 'forms'">
             <div v-for="(form, index) in formItems" :key="index" class="announcement-card form-card">
-              <div class="form-icon">{{ form.icon }}</div>
+              <div class="form-icon"><component :is="form.icon" /></div>
               
               <h3>{{ form.title }}</h3>
               <p class="khmer-name">{{ form.khmerName }}</p>
@@ -77,8 +77,8 @@
               </div>
 
               <div class="form-actions">
-                <button class="download-btn">📥 Download Form</button>
-                <button class="guide-btn">📖 Guide</button>
+                <button class="download-btn"><Download class="inline-icon" /> Download Form</button>
+                <button class="guide-btn"><BookText class="inline-icon" /> Guide</button>
               </div>
             </div>
           </template>
@@ -86,7 +86,7 @@
       </div>
 
       <div class="official-notice">
-        <div class="notice-icon">⚠️</div>
+        <div class="notice-icon"><TriangleAlert /></div>
         <div class="notice-content">
           <h4>Important Notice</h4>
           <p>
@@ -101,14 +101,27 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import {
+  BookText,
+  ClipboardList,
+  Download,
+  FileText,
+  Megaphone,
+  Newspaper,
+  Package,
+  PenSquare,
+  TriangleAlert,
+  UserRound,
+  WalletCards,
+} from 'lucide-vue-next'
+import { ref } from 'vue'
 
 const activeTab = ref('news')
 
 const tabs = [
-  { id: 'news', label: 'Tax News', icon: '📰' },
-  { id: 'announcements', label: 'Announcements', icon: '📢' },
-  { id: 'forms', label: 'Forms & Documents', icon: '📋' }
+  { id: 'news', label: 'Tax News', icon: Newspaper },
+  { id: 'announcements', label: 'Announcements', icon: Megaphone },
+  { id: 'forms', label: 'Forms & Documents', icon: ClipboardList }
 ]
 
 const newsItems = [
@@ -175,7 +188,7 @@ const announcementItems = [
 
 const formItems = [
   {
-    icon: '📝',
+    icon: PenSquare,
     title: 'Annual Tax Return Form',
     khmerName: 'ទម្រង់ពន្ធលើប្រាក់បៀវត្សប្រចាំឆ្នាំ',
     description: 'Official form for annual tax return submission. Required for all individuals and businesses with taxable income.',
@@ -183,7 +196,7 @@ const formItems = [
     updated: 'January 2026',
   },
   {
-    icon: '📦',
+    icon: Package,
     title: 'VAT Declaration Form',
     khmerName: 'ឯកសារលេខគាំទ្របន្ថែម',
     description: 'Monthly/quarterly VAT declaration form for registered VAT businesses. Used to report sales, purchases, and calculate VAT liability.',
@@ -191,7 +204,7 @@ const formItems = [
     updated: 'February 2026',
   },
   {
-    icon: '💼',
+    icon: WalletCards,
     title: 'Business Registration Form',
     khmerName: 'ឯកសារចុះឈ្មោះបង្កើតឧស្សាហកម្ម',
     description: 'Form for business registration and tax identification number (TIN) assignment. Required before commencing business operations.',
@@ -199,7 +212,7 @@ const formItems = [
     updated: 'December 2025',
   },
   {
-    icon: '👤',
+    icon: UserRound,
     title: 'Individual Tax Registration',
     khmerName: 'ឯកសារចុះឈ្មោះបង្កើតពលរដ្ឋលាច',
     description: 'Registration form for self-employed individuals and independent contractors. Required if income exceeds specified thresholds.',
@@ -292,7 +305,16 @@ const formatAnnounceDate = (dateStr: string) => {
 }
 
 .tab-icon {
-  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inline-icon {
+  width: 14px;
+  height: 14px;
 }
 
 .tab-count {
@@ -396,6 +418,9 @@ const formatAnnounceDate = (dateStr: string) => {
 .read-time {
   font-size: 13px;
   color: #94a3b8;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .read-more-btn {
@@ -511,6 +536,9 @@ const formatAnnounceDate = (dateStr: string) => {
   color: #0f766e;
   font-weight: 600;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
 /* Form Card Specific */
@@ -520,8 +548,12 @@ const formatAnnounceDate = (dateStr: string) => {
 }
 
 .form-icon {
-  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: #0f766e;
   margin-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .khmer-name {
@@ -570,6 +602,10 @@ const formatAnnounceDate = (dateStr: string) => {
   font-size: 13px;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .download-btn {
@@ -603,7 +639,9 @@ const formatAnnounceDate = (dateStr: string) => {
 }
 
 .notice-icon {
-  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  color: #f59e0b;
   flex-shrink: 0;
 }
 

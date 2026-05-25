@@ -1,13 +1,13 @@
 <template>
   <section class="features">
     <div class="section-header">
-      <span class="section-label">🎯 មុខងារចម្បង</span>
+      <span class="section-label"><Target class="section-label-icon" /> មុខងារចម្បង</span>
       <h2>ដែលទាក់ទងនឹងពន្ធខ្មែរ</h2>
     </div>
 
     <div class="card-container">
       <div class="card card-1">
-        <div class="card-icon">💵</div>
+        <div class="card-icon"><HandCoins /></div>
         <h3>អាករលើតម្លៃបន្ថែម</h3>
         <p>
           រៀនអំពីអាករលើតម្លៃបន្ថែម (VAT)، ពន្ធលើការចូលចាំ និងការចេញចាំ។
@@ -16,7 +16,7 @@
       </div>
 
       <div class="card card-2">
-        <div class="card-icon">💼</div>
+        <div class="card-icon"><BriefcaseBusiness /></div>
         <h3>ពន្ធលើប្រាក់បៀវត្ស</h3>
         <p>
           ស្វាគមន៍ការគណនាពន្ធលើប្រាក់បៀវត្ស ឧក្រិដ្ឋជនក្នុងស្រុក និងអ្នកបរទេស។
@@ -25,7 +25,7 @@
       </div>
 
       <div class="card card-3">
-        <div class="card-icon">🧮</div>
+        <div class="card-icon"><Calculator /></div>
         <h3>គណនាលឿនៗ</h3>
         <p>
           គណនាពន្ធលើប្រាក់បៀវត្ស និង VAT បានលឿន ត្រឹមត្រូវ និងងាយស្រួល។
@@ -35,6 +35,10 @@
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+import { BriefcaseBusiness, Calculator, HandCoins, Target } from 'lucide-vue-next'
+</script>
 
 <style scoped>
 .features {
@@ -48,12 +52,19 @@
 }
 
 .section-label {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 14px;
   font-weight: 700;
   color: #0f766e;
   margin-bottom: 12px;
   letter-spacing: 1px;
+}
+
+.section-label-icon {
+  width: 16px;
+  height: 16px;
 }
 
 .features h2 {
@@ -113,9 +124,16 @@
 }
 
 .card-icon {
-  font-size: 50px;
+  width: 50px;
+  height: 50px;
   margin-bottom: 20px;
   animation: bounce 3s ease-in-out infinite;
+  color: #0f766e;
+}
+
+.card-icon :deep(svg) {
+  width: 100%;
+  height: 100%;
 }
 
 @keyframes bounce {

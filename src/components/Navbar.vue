@@ -4,7 +4,7 @@
       <!-- Logo -->
       <div class="logo-section">
         <div class="logo">
-          <span class="logo-icon">🏛️</span>
+          <Landmark class="logo-icon" />
           <div class="logo-text">
             <div class="logo-main">ពន្ធខ្មែរ</div>
             <div class="logo-sub">Tax Khmer</div>
@@ -49,6 +49,7 @@
 </template>
 
 <script setup lang="ts">
+import { Landmark } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -97,7 +98,9 @@ const goToCalculator = () => {
 }
 
 .logo-icon {
-  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  color: #0f766e;
 }
 
 .logo-text {

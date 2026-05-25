@@ -8,7 +8,7 @@
 
       <div class="benefits-grid">
         <div class="benefit-card" v-for="(benefit, index) in benefits" :key="index">
-          <div class="icon-container"><div class="icon">{{ benefit.icon }}</div></div>
+          <div class="icon-container"><div class="icon"><component :is="benefit.icon" /></div></div>
           <h3>{{ benefit.title }}</h3>
           <p>{{ benefit.description }}</p>
           <div class="impact-points">
@@ -34,27 +34,29 @@
 </template>
 
 <script setup lang="ts">
+import { BookOpen, Hospital, Route, ShieldCheck } from 'lucide-vue-next'
+
 const benefits = [
   {
-    icon: '🏥',
+    icon: Hospital,
     title: 'សុខាភិបាល',
     description: 'ពន្ធគាំទ្រថវិកាសម្រាប់មន្ទីរពេទ្យ និងសេវាសុខាភិបាលសាធារណៈ។',
     impacts: ['មន្ទីរពេទ្យ និងមណ្ឌលសុខភាព', 'ការថែទាំបន្ទាន់', 'ការលើកកម្ពស់សុខភាពសហគមន៍']
   },
   {
-    icon: '📚',
+    icon: BookOpen,
     title: 'ការអប់រំ',
     description: 'ពន្ធគាំទ្រសាលារៀន សាកលវិទ្យាល័យ និងកម្មវិធីបណ្តុះបណ្តាលជំនាញ។',
     impacts: ['សាលារៀន និងសាកលវិទ្យាល័យ', 'គ្រូបង្រៀន និងសម្ភារៈសិក្សា', 'អាហារូបករណ៍ និងឱកាសសិក្សា']
   },
   {
-    icon: '🛣️',
+    icon: Route,
     title: 'ហេដ្ឋារចនាសម្ព័ន្ធ',
     description: 'ពន្ធជួយកសាង និងថែទាំផ្លូវ ស្ពាន និងប្រព័ន្ធដឹកជញ្ជូន។',
     impacts: ['កែលម្អផ្លូវ និងស្ពាន', 'បង្កើនសុវត្ថិភាពចរាចរណ៍', 'គាំទ្រការដឹកជញ្ជូនពាណិជ្ជកម្ម']
   },
   {
-    icon: '🔒',
+    icon: ShieldCheck,
     title: 'សន្តិសុខសាធារណៈ',
     description: 'ពន្ធគាំទ្រសន្តិសុខសហគមន៍ និងការអនុវត្តច្បាប់។',
     impacts: ['សុវត្ថិភាពសាធារណៈ', 'ការឆ្លើយតបគ្រោះអាសន្ន', 'ការអនុវត្តច្បាប់ដោយស្ថាប័នពាក់ព័ន្ធ']
@@ -75,7 +77,7 @@ const benefits = [
 .benefit-card { background: white; border-radius: 16px; padding: 30px; border: 1px solid rgba(20, 184, 166, 0.1); transition: all 0.3s ease; text-align: center; }
 .benefit-card:hover { transform: translateY(-8px); border-color: rgba(20, 184, 166, 0.3); box-shadow: 0 20px 40px rgba(15, 118, 110, 0.15); }
 .icon-container { margin-bottom: 20px; }
-.icon { font-size: 64px; display: inline-block; }
+.icon { width: 64px; height: 64px; display: inline-flex; color: #0f766e; }
 .benefit-card h3 { font-size: 22px; font-weight: 700; color: #0f766e; margin-bottom: 12px; }
 .benefit-card p { font-size: 14px; color: #64748b; margin-bottom: 20px; line-height: 1.7; }
 .impact-points { display: flex; flex-direction: column; gap: 10px; text-align: left; }
