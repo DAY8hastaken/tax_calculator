@@ -1,19 +1,107 @@
 <template>
-  <div class="page"><Navbar /><section class="wrap"><div class="box">
-    <h1>ម៉ាស៊ីនគណនាពន្ធកាត់ទុក</h1>
-    <p class="intro">គណនាពន្ធកាត់ទុកតាមប្រភេទទូទាត់ និងស្ថានភាពអ្នកទទួលប្រាក់។</p>
-    <div class="form-grid">
-      <div><label>ចំនួនទឹកប្រាក់ទូទាត់</label><input v-model.number="amount" type="number" placeholder="បញ្ចូលចំនួនទឹកប្រាក់"/><p class="help">បញ្ចូលចំនួនប្រាក់ដែលត្រូវទូទាត់ជាក់ស្តែង។</p></div>
-      <div><label>អ្នកទទួលប្រាក់</label><select v-model="status"><option value="resident">និវាសនជន</option><option value="non">អនិវាសនជន</option></select><p class="help">អនិវាសនជនប្រើអត្រា 14%។</p></div>
-      <div><label>ប្រភេទទូទាត់</label><select v-model="type"><option value="service">សេវាកម្ម</option><option value="royalty">សួយសារ</option><option value="interest">ការប្រាក់ទូទៅ</option><option value="rent">ថ្លៃជួល</option><option value="bf">ការប្រាក់ធនាគារ (មានកាលកំណត់)</option><option value="bnf">ការប្រាក់ធនាគារ (គ្មានកាលកំណត់)</option></select><p class="help">ជ្រើសប្រភេទច្បាស់លាស់ ដើម្បីបានអត្រាត្រឹមត្រូវ។</p></div>
-      <div><label>ករណីលើកលែង</label><select v-model="exempt"><option :value="false">គ្មាន</option><option :value="true">មានលើកលែង</option></select><p class="help">បើមានលើកលែង ពន្ធកាត់ទុក = 0។</p></div>
-    </div>
-    <div class="result">
-      <div>អត្រាអនុវត្ត: <strong>{{ rate }}%</strong></div>
-      <div>ពន្ធកាត់ទុក: <strong>{{ tax.toFixed(2) }}</strong></div>
-      <div>សុទ្ធបង់ទៅអ្នកទទួល: <strong>{{ net.toFixed(2) }}</strong></div>
-    </div>
-  </div></section><FooterSection /></div>
+  <TaxCalculatorLayout
+    badge="Withholding Tax Calculator"
+    title="ម៉ាស៊ីនគណនាពន្ធកាត់ទុក"
+    intro="គណនាពន្ធកាត់ទុកតាមប្រភេទទូទាត់ និងស្ថានភាពអ្នកទទួលប្រាក់ ដើម្បីឱ្យអ្នកមើលឃើញទាំងអត្រា ពន្ធដែលត្រូវកាត់ និងទឹកប្រាក់សុទ្ធ។"
+    formula="ពន្ធកាត់ទុក = ចំនួនទឹកប្រាក់ទូទាត់ × អត្រាពន្ធ"
+    :highlights="highlights"
+    :tips="tips"
+  >
+    <template #fields>
+      <div class="calc-grid">
+        <div class="calc-field">
+          <label class="calc-label">ចំនួនទឹកប្រាក់ទូទាត់</label>
+          <input v-model.number="amount" class="calc-input" type="number" placeholder="បញ្ចូលចំនួនទឹកប្រាក់ត្រូវទូទាត់" />
+          <p class="calc-help">បញ្ចូលចំនួនប្រាក់សរុបមុនកាត់ពន្ធ។</p>
+        </div>
+
+        <div class="calc-field">
+          <label class="calc-label">ស្ថានភាពអ្នកទទួលប្រាក់</label>
+          <select v-model="status" class="calc-select">
+            <option value="resident">និវាសនជន</option>
+            <option value="non">អនិវាសនជន</option>
+          </select>
+          <p class="calc-help">អនិវាសនជនជាទូទៅអនុវត្តអត្រា `14%` លើចំណូលប្រភពកម្ពុជា។</p>
+        </div>
+
+        <div class="calc-field">
+          <label class="calc-label">ប្រភេទទូទាត់</label>
+          <select v-model="type" class="calc-select">
+            <option value="service">សេវាកម្ម</option>
+            <option value="royalty">សួយសារ</option>
+            <option value="interest">ការប្រាក់ទូទៅ</option>
+            <option value="rent">ថ្លៃជួល</option>
+            <option value="bf">ការប្រាក់ធនាគារ (មានកាលកំណត់)</option>
+            <option value="bnf">ការប្រាក់ធនាគារ (គ្មានកាលកំណត់)</option>
+          </select>
+          <p class="calc-help">ជ្រើសប្រភេទឱ្យត្រូវ ព្រោះអត្រាពន្ធខុសគ្នាតាមប្រភេទទូទាត់។</p>
+        </div>
+
+        <div class="calc-field">
+          <label class="calc-label">មានលើកលែងពន្ធដែរឬទេ?</label>
+          <select v-model="exempt" class="calc-select">
+            <option :value="false">គ្មានលើកលែង</option>
+            <option :value="true">មានលើកលែង</option>
+          </select>
+          <p class="calc-help">បើប្រតិបត្តិការនោះត្រូវបានលើកលែង ពន្ធកាត់ទុកនឹងស្មើ `0`។</p>
+        </div>
+      </div>
+    </template>
+
+    <template #results>
+      <div class="calc-result-list">
+        <div class="calc-result-item">
+          <span class="calc-result-label">អត្រាពន្ធអនុវត្ត</span>
+          <strong class="calc-result-value">{{ rate }}%</strong>
+        </div>
+        <div class="calc-result-item">
+          <span class="calc-result-label">ពន្ធកាត់ទុក</span>
+          <strong class="calc-result-value">{{ tax.toFixed(2) }}</strong>
+        </div>
+        <div class="calc-result-item calc-result-item--accent">
+          <span class="calc-result-label">ទឹកប្រាក់សុទ្ធបង់ទៅអ្នកទទួល</span>
+          <strong class="calc-result-value">{{ net.toFixed(2) }}</strong>
+        </div>
+      </div>
+    </template>
+  </TaxCalculatorLayout>
 </template>
-<script setup lang="ts">import { computed, ref } from 'vue';import Navbar from '@/components/Navbar.vue';import FooterSection from '@/components/FooterSection.vue';const amount=ref(0);const status=ref<'resident'|'non'>('resident');const type=ref<'service'|'royalty'|'interest'|'rent'|'bf'|'bnf'>('service');const exempt=ref(false);const rate=computed(()=>{if(exempt.value) return 0; if(status.value==='non') return 14; const m={service:15,royalty:15,interest:15,rent:10,bf:6,bnf:4} as const; return m[type.value]});const tax=computed(()=>amount.value*rate.value/100);const net=computed(()=>amount.value-tax.value);</script>
-<style scoped>.wrap{padding:40px 20px}.box{max-width:960px;margin:auto;display:grid;gap:14px}.intro{color:#475569}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{font-weight:700;color:#0f766e}input,select{padding:10px;border:1px solid #99d8cf;border-radius:8px}.help{font-size:12px;color:#64748b;margin:6px 0 0}.result{background:#ecfeff;padding:14px;border-radius:10px;display:grid;gap:6px}@media(max-width:800px){.form-grid{grid-template-columns:1fr}}</style>
+
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import TaxCalculatorLayout from '@/components/TaxCalculatorLayout.vue'
+
+const amount = ref(0)
+const status = ref<'resident' | 'non'>('resident')
+const type = ref<'service' | 'royalty' | 'interest' | 'rent' | 'bf' | 'bnf'>('service')
+const exempt = ref(false)
+
+const rate = computed(() => {
+  if (exempt.value) return 0
+  if (status.value === 'non') return 14
+  const residentRates = {
+    service: 15,
+    royalty: 15,
+    interest: 15,
+    rent: 10,
+    bf: 6,
+    bnf: 4
+  } as const
+  return residentRates[type.value]
+})
+
+const tax = computed(() => amount.value * rate.value / 100)
+const net = computed(() => amount.value - tax.value)
+
+const highlights = computed(() => [
+  { label: 'អត្រាពន្ធ', value: `${rate.value}%` },
+  { label: 'ពន្ធកាត់ទុក', value: tax.value.toFixed(2) },
+  { label: 'សុទ្ធត្រូវបង់', value: net.value.toFixed(2) }
+])
+
+const tips = [
+  'ស្ថានភាពនិវាសនជន និងអនិវាសនជនប៉ះពាល់ដោយផ្ទាល់ទៅអត្រាពន្ធកាត់ទុក។',
+  'ត្រូវតែជ្រើសប្រភេទទូទាត់ឱ្យត្រឹមត្រូវ ដោយសារអត្រាសេវា សួយសារ ការប្រាក់ និងថ្លៃជួលខុសគ្នា។',
+  'បើមានការលើកលែងតាមច្បាប់ ឬតាមសន្ធិសញ្ញា អាចធ្វើឱ្យពន្ធកាត់ទុកស្មើសូន្យ។'
+]
+</script>

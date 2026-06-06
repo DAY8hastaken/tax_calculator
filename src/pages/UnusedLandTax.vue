@@ -1,19 +1,19 @@
+
 <template>
   <div class="page">
     <Navbar />
-    <section class="tax-section">
-      <div class="container">
-        <h1>ពន្ធលើដីមិនប្រើប្រាស់ (Unused Land Tax)</h1>
-        <p class="lead">
-          ពន្ធនេះអនុវត្តលើដីដែលទុកចោលមិនអភិវឌ្ឍ ឬមិនប្រើប្រាស់ ក្នុងតំបន់ដែលច្បាប់កំណត់។
-          គោលបំណងគឺលើកទឹកចិត្តឱ្យប្រើដីឱ្យមានប្រសិទ្ធភាព។
-        </p>
-
-        <h2>រូបមន្តគណនា</h2>
-        <p>ពន្ធលើដីមិនប្រើប្រាស់ = តម្លៃដីជាប់ពន្ធ × អត្រាអនុវត្ត</p>
-        <p>ចំណាំ៖ អត្រាអាចខុសគ្នាតាមតំបន់។</p>
-      </div>
-    </section>
+    <TaxLessonLayout
+      :title="title"
+      :intro="intro"
+      :formula="formula"
+      :when-on="whenOn"
+      :when-off="whenOff"
+      :when-to-use="whenToUse"
+      calculator-link="/tax-calculator/unused-land"
+      calculator-label="បើកម៉ាស៊ីនគណនាពន្ធដីមិនប្រើប្រាស់"
+      :key-points="keyPoints"
+      :sections="sections"
+    />
     <FooterSection />
   </div>
 </template>
@@ -21,15 +21,64 @@
 <script setup lang="ts">
 import Navbar from '../components/Navbar.vue'
 import FooterSection from '../components/FooterSection.vue'
+import TaxLessonLayout from '../components/TaxLessonLayout.vue'
+
+const title = "ពន្ធលើដីមិនប្រើប្រាស់"
+const intro = "ពន្ធលើដីមិនប្រើប្រាស់អនុវត្តលើដីដែលទុកចោល ឬមិនអភិវឌ្ឍក្នុងតំបន់ដែលច្បាប់កំណត់។ គោលបំណងរបស់ពន្ធនេះគឺលើកទឹកចិត្តឱ្យប្រើដីឱ្យមានប្រសិទ្ធភាព និងបង្កើនការអភិវឌ្ឍដីធ្លី។"
+const formula = "ពន្ធលើដីមិនប្រើប្រាស់ = តម្លៃដីជាប់ពន្ធ × អត្រាអនុវត្ត"
+const whenOn = "ពេលកាន់កាប់ដីនៅតំបន់ជាប់ពន្ធ ប៉ុន្តែមិនបានប្រើប្រាស់ ឬមិនអភិវឌ្ឍតាមលក្ខខណ្ឌច្បាប់។"
+const whenOff = "ពេលដីត្រូវបានប្រើប្រាស់ ឬស្ថិតក្នុងប្រភេទលើកលែង/តំបន់ដែលមិនអនុវត្តពន្ធនេះ។"
+const whenToUse = "ប្រើពេលពិនិត្យដីដែលកាន់កាប់ហើយត្រូវគណនាពន្ធប្រចាំឆ្នាំ។"
+const keyPoints = [
+  "អនុវត្តលើដីមិនប្រើប្រាស់",
+  "អត្រាអាស្រ័យលើតំបន់",
+  "ត្រូវពិនិត្យស្ថានភាពប្រើប្រាស់ដីជាក់ស្តែង"
+]
+const sections = [
+  {
+    "title": "១) និយមន័យ និងគោលបំណង",
+    "paragraphs": [
+      "ដីមិនប្រើប្រាស់គឺដីដែលទុកចោល ឬមិនយកទៅអភិវឌ្ឍតាមគោលបំណងដែលសមស្រប។ ពន្ធនេះត្រូវបានប្រើដើម្បីជំរុញម្ចាស់ដីឱ្យប្រើដីឱ្យមានផលប្រយោជន៍សេដ្ឋកិច្ច។"
+    ]
+  },
+  {
+    "title": "២) រូបមន្ត",
+    "paragraphs": [
+      "ពន្ធលើដីមិនប្រើប្រាស់ = តម្លៃដីជាប់ពន្ធ × អត្រាអនុវត្ត។",
+      "អត្រាពិតប្រាកដអាចខុសគ្នាតាមតំបន់ និងលក្ខខណ្ឌរដ្ឋបាលពន្ធដារ។"
+    ]
+  },
+  {
+    "title": "៣) ពេលណាពន្ធអនុវត្ត?",
+    "bullets": [
+      "ពេលកាន់កាប់ដីនៅតំបន់ជាប់ពន្ធ ប៉ុន្តែមិនបានប្រើប្រាស់",
+      "ពេលដីមិនអភិវឌ្ឍតាមលក្ខខណ្ឌច្បាប់",
+      "ពេលដីស្ថិតក្នុងបញ្ជីដែលអាជ្ញាធរពាក់ព័ន្ធកំណត់"
+    ]
+  },
+  {
+    "title": "៤) ពេលណាមិនអនុវត្ត?",
+    "bullets": [
+      "ពេលដីត្រូវបានប្រើប្រាស់ ឬអភិវឌ្ឍត្រឹមត្រូវ",
+      "ពេលស្ថិតក្នុងបញ្ជីលើកលែង",
+      "ពេលមានការអនុម័តពិសេសពីអាជ្ញាធរ"
+    ]
+  },
+  {
+    "title": "៥) ចំណុចចាំសម្រាប់ប្រឡង",
+    "bullets": [
+      "ពន្ធនេះផ្តោតលើស្ថានភាពប្រើប្រាស់ដី",
+      "មិនមែនលើអគារដែលកំពុងប្រើប្រាស់ជាធម្មតាទេ",
+      "អត្រាប្រហែលអាចខុសគ្នាតាមតំបន់"
+    ]
+  }
+]
 </script>
 
 <style scoped>
-.page { width: 100%; overflow-x: hidden; background: #ffffff; }
-.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-.tax-section { padding: 56px 0; }
-h1 { color: #0f766e; font-size: 34px; margin-bottom: 14px; }
-.lead { color: #334155; line-height: 1.9; margin-bottom: 20px; }
-h2 { color: #0f172a; margin: 18px 0 10px; font-size: 24px; }
-p, li { color: #334155; line-height: 1.9; }
-ul { padding-left: 22px; }
+.page {
+  width: 100%;
+  overflow-x: hidden;
+  background: #ffffff;
+}
 </style>

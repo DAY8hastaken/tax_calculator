@@ -15,11 +15,11 @@
 
         <div class="hub-metrics">
           <div class="metric-card">
-            <h3>13+</h3>
+            <h3>14+</h3>
             <p>ប្រភេទពន្ធសំខាន់</p>
           </div>
           <div class="metric-card">
-            <h3>12</h3>
+            <h3>13</h3>
             <p>ម៉ាស៊ីនគណនាឯករាជ្យ</p>
           </div>
           <div class="metric-card">

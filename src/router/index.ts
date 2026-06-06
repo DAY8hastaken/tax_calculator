@@ -164,6 +164,11 @@ const routes = [
     component: CorporateIncomeCalculatorPage
   },
   {
+    path: '/tax-calculator/income-tax',
+    name: 'IncomeTaxCalculatorPage',
+    component: CorporateIncomeCalculatorPage
+  },
+  {
     path: '/tax-calculator/patent',
     name: 'PatentCalculatorPage',
     component: PatentCalculatorPage

@@ -1,13 +1,66 @@
 <template>
-  <div class="page"><Navbar /><section class="wrap"><div class="box">
-    <h1>ម៉ាស៊ីនគណនាពន្ធលើអចលនទ្រព្យ</h1>
-    <p class="intro">គណនា 0.1% លើតម្លៃអចលនទ្រព្យក្រោយកាត់លើកលែង។</p>
-    <div class="form-grid">
-      <div><label>តម្លៃអចលនទ្រព្យ</label><input v-model.number="value" type="number" placeholder="បញ្ចូលតម្លៃអចលនទ្រព្យ"/><p class="help">បញ្ចូលតម្លៃអចលនទ្រព្យសរុប។</p></div>
-      <div><label>តម្លៃលើកលែង</label><input v-model.number="exemption" type="number" placeholder="បញ្ចូលតម្លៃលើកលែង"/><p class="help">បញ្ចូលតម្លៃដែលអនុញ្ញាតកាត់ចេញពីមូលដ្ឋាន។</p></div>
-    </div>
-    <div class="result"><div>មូលដ្ឋានជាប់ពន្ធ: <strong>{{ taxable.toFixed(2) }}</strong></div><div>ពន្ធ (0.1%): <strong>{{ tax.toFixed(2) }}</strong></div></div>
-  </div></section><FooterSection /></div>
+  <TaxCalculatorLayout
+    badge="Property Tax Calculator"
+    title="ម៉ាស៊ីនគណនាពន្ធលើអចលនទ្រព្យ"
+    intro="គណនាពន្ធលើអចលនទ្រព្យអត្រា 0.1% លើតម្លៃជាប់ពន្ធក្រោយកាត់តម្លៃលើកលែង។"
+    formula="ពន្ធលើអចលនទ្រព្យ = (តម្លៃអចលនទ្រព្យ − តម្លៃលើកលែង) × 0.1%"
+    :highlights="highlights"
+    :tips="tips"
+  >
+    <template #fields>
+      <div class="calc-grid">
+        <div class="calc-field">
+          <label class="calc-label">តម្លៃអចលនទ្រព្យ</label>
+          <input v-model.number="value" class="calc-input" type="number" placeholder="បញ្ចូលតម្លៃអចលនទ្រព្យសរុប" />
+          <p class="calc-help">បញ្ចូលតម្លៃអចលនទ្រព្យដែលត្រូវយកមកគណនា។</p>
+        </div>
+
+        <div class="calc-field">
+          <label class="calc-label">តម្លៃលើកលែង</label>
+          <input v-model.number="exemption" class="calc-input" type="number" placeholder="បញ្ចូលតម្លៃលើកលែង" />
+          <p class="calc-help">បញ្ចូលតម្លៃដែលអាចកាត់ចេញពីមូលដ្ឋានជាប់ពន្ធបាន។</p>
+        </div>
+      </div>
+    </template>
+
+    <template #results>
+      <div class="calc-result-list">
+        <div class="calc-result-item">
+          <span class="calc-result-label">មូលដ្ឋានជាប់ពន្ធ</span>
+          <strong class="calc-result-value">{{ taxable.toFixed(2) }}</strong>
+        </div>
+        <div class="calc-result-item">
+          <span class="calc-result-label">អត្រាពន្ធអចលនទ្រព្យ</span>
+          <strong class="calc-result-value">0.1%</strong>
+        </div>
+        <div class="calc-result-item calc-result-item--accent">
+          <span class="calc-result-label">ពន្ធលើអចលនទ្រព្យត្រូវបង់</span>
+          <strong class="calc-result-value">{{ tax.toFixed(2) }}</strong>
+        </div>
+      </div>
+    </template>
+  </TaxCalculatorLayout>
 </template>
-<script setup lang="ts">import { computed, ref } from 'vue';import Navbar from '@/components/Navbar.vue';import FooterSection from '@/components/FooterSection.vue';const value=ref(0);const exemption=ref(0);const taxable=computed(()=>Math.max(0,value.value-exemption.value));const tax=computed(()=>taxable.value*0.001);</script>
-<style scoped>.wrap{padding:40px 20px}.box{max-width:960px;margin:auto;display:grid;gap:14px}.intro{color:#475569}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{font-weight:700;color:#0f766e}input{padding:10px;border:1px solid #99d8cf;border-radius:8px}.help{font-size:12px;color:#64748b;margin:6px 0 0}.result{background:#ecfeff;padding:14px;border-radius:10px;display:grid;gap:6px}@media(max-width:800px){.form-grid{grid-template-columns:1fr}}</style>
+
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import TaxCalculatorLayout from '@/components/TaxCalculatorLayout.vue'
+
+const value = ref(0)
+const exemption = ref(0)
+
+const taxable = computed(() => Math.max(0, value.value - exemption.value))
+const tax = computed(() => taxable.value * 0.001)
+
+const highlights = computed(() => [
+  { label: 'តម្លៃសរុប', value: value.value.toFixed(2) },
+  { label: 'មូលដ្ឋានជាប់ពន្ធ', value: taxable.value.toFixed(2) },
+  { label: 'ពន្ធត្រូវបង់', value: tax.value.toFixed(2) }
+])
+
+const tips = [
+  'ត្រូវបញ្ចូលតម្លៃលើកលែងឱ្យត្រឹមត្រូវ មុននឹងគណនាពន្ធ។',
+  'អត្រាគំរូក្នុងម៉ូឌុលនេះគឺ 0.1% លើមូលដ្ឋានក្រោយកាត់ចេញ។',
+  'បើតម្លៃលើកលែងធំជាងតម្លៃអចលនទ្រព្យ លទ្ធផលមូលដ្ឋានជាប់ពន្ធនឹងស្មើសូន្យ។'
+]
+</script>

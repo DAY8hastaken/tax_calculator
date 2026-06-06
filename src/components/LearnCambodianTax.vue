@@ -90,7 +90,7 @@ const taxTypes = [
   {
     icon: Hourglass,
     title: 'Prepayment Tax',
-    khmerTitle: 'ពន្ធបង់ជាមុន',
+    khmerTitle: 'ពន្ធលើប្រាក់ចំណូលបង់ជាមុន',
     description: 'អាជីវកម្មខ្លះត្រូវបង់ពន្ធជាមុនលើចំណូល ដើម្បីធានាការបង់ពន្ធទាន់ពេល និងត្រឹមត្រូវ។',
     rate: '1%',
     appliesTo: 'ចំណូលអាជីវកម្ម',
@@ -131,6 +131,15 @@ const taxTypes = [
     rate: '20% / 9%',
     appliesTo: 'ប្រាក់ចំណេញសុទ្ធ',
     path: '/tax-types/business'
+  },
+  {
+    icon: Hourglass,
+    title: 'Annual Income Tax',
+    khmerTitle: 'ពន្ធលើប្រាក់ចំណូលប្រចាំឆ្នាំ',
+    description: 'ពន្ធលើប្រាក់ចំណូលប្រចាំឆ្នាំអនុវត្តលើប្រាក់ចំណេញជាប់ពន្ធ និងគណនាតាមតារាងអត្រាកើនឡើងពី 0% ដល់ 20%។',
+    rate: '0% - 20% / 30% / 0%',
+    appliesTo: 'ប្រាក់ចំណេញជាប់ពន្ធ',
+    path: '/tax-types/general#income-tax'
   },
   {
     icon: Receipt,

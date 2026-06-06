@@ -1,79 +1,98 @@
 <template>
-  <div class="page">
-    <Navbar />
-    <section class="wrap">
-      <div class="box">
-        <h1>ម៉ាស៊ីនគណនា VAT</h1>
-        <p class="intro">គណនា VAT ត្រូវបង់ = Output VAT − Input VAT។</p>
-
-        <div class="form-grid">
-          <div>
-            <label>ប្រភេទប្រតិបត្តិការ</label>
-            <select v-model="supplyType">
-              <option value="domestic">ផ្គត់ផ្គង់ក្នុងស្រុក</option>
-              <option value="export">នាំចេញ (0%)</option>
-            </select>
-            <p class="help">ជ្រើសប្រភេទលក់ ដើម្បីកំណត់អត្រា VAT ត្រឹមត្រូវ។</p>
-          </div>
-
-          <div>
-            <label>តម្លៃលក់ (Sales)</label>
-            <input v-model.number="sales" type="number" placeholder="បញ្ចូលតម្លៃលក់" />
-            <p class="help">បញ្ចូលចំនួនសរុបនៃការលក់ក្នុងខែនេះ។</p>
-          </div>
-
-          <div>
-            <label>តម្លៃលក់នេះរួម VAT ដែរឬទេ?</label>
-            <select v-model="salesIncludeVat">
-              <option :value="false">មិនរួម VAT</option>
-              <option :value="true">រួម VAT</option>
-            </select>
-            <p class="help">ជ្រើសឲ្យត្រូវ ដើម្បីបំបែកមូលដ្ឋានគិតពន្ធបានត្រឹមត្រូវ។</p>
-          </div>
-
-          <div>
-            <label>តម្លៃទិញ (Purchases)</label>
-            <input v-model.number="purchases" type="number" placeholder="បញ្ចូលតម្លៃទិញ" />
-            <p class="help">បញ្ចូលចំនួនទិញដែលពាក់ព័ន្ធនឹងអាជីវកម្ម។</p>
-          </div>
-
-          <div>
-            <label>តម្លៃទិញនេះរួម VAT ដែរឬទេ?</label>
-            <select v-model="purchaseIncludeVat">
-              <option :value="false">មិនរួម VAT</option>
-              <option :value="true">រួម VAT</option>
-            </select>
-            <p class="help">ប្រើសម្រាប់គណនា Input VAT credit។</p>
-          </div>
-
-          <div>
-            <label>អត្រា VAT</label>
-            <select v-model.number="rate">
-              <option :value="10">10%</option>
-              <option :value="0">0%</option>
-            </select>
-            <p class="help">សម្រាប់ក្នុងស្រុកជាទូទៅ 10%។ នាំចេញប្រើ 0%។</p>
-          </div>
+  <TaxCalculatorLayout
+    badge="VAT Calculator"
+    title="ម៉ាស៊ីនគណនា VAT"
+    intro="គណនា VAT ត្រូវបង់ដោយប្រៀបធៀប Output VAT និង Input VAT ហើយបង្ហាញថាតើត្រូវបង់បន្ថែម ឬមានឥណទានសម្រាប់ខែក្រោយ។"
+    formula="VAT ត្រូវបង់ = Output VAT − Input VAT"
+    :highlights="highlights"
+    :tips="tips"
+  >
+    <template #fields>
+      <div class="calc-grid">
+        <div class="calc-field">
+          <label class="calc-label">ប្រភេទប្រតិបត្តិការ</label>
+          <select v-model="supplyType" class="calc-select">
+            <option value="domestic">ផ្គត់ផ្គង់ក្នុងស្រុក</option>
+            <option value="export">នាំចេញ (0%)</option>
+          </select>
+          <p class="calc-help">ជ្រើសឱ្យត្រូវ ដើម្បីកំណត់អត្រា VAT សមស្របតាមប្រតិបត្តិការ។</p>
         </div>
 
-        <div class="result">
-          <div>មូលដ្ឋានលក់: <strong>{{ outputBase.toFixed(2) }}</strong></div>
-          <div>មូលដ្ឋានទិញ: <strong>{{ inputBase.toFixed(2) }}</strong></div>
-          <div>Output VAT: <strong>{{ outputVat.toFixed(2) }}</strong></div>
-          <div>Input VAT: <strong>{{ inputVat.toFixed(2) }}</strong></div>
-          <div>VAT ត្រូវបង់: <strong>{{ payableVat.toFixed(2) }}</strong></div>
-          <div>VAT ឥណទានលើកខែក្រោយ: <strong>{{ carryForward.toFixed(2) }}</strong></div>
+        <div class="calc-field">
+          <label class="calc-label">អត្រា VAT</label>
+          <select v-model.number="rate" class="calc-select">
+            <option :value="10">10%</option>
+            <option :value="0">0%</option>
+          </select>
+          <p class="calc-help">សម្រាប់ក្នុងស្រុកជាទូទៅប្រើ `10%` ខណៈការនាំចេញប្រើ `0%`។</p>
+        </div>
+
+        <div class="calc-field">
+          <label class="calc-label">តម្លៃលក់ (Sales)</label>
+          <input v-model.number="sales" class="calc-input" type="number" placeholder="បញ្ចូលតម្លៃលក់សរុប" />
+          <p class="calc-help">បញ្ចូលចំនួនសរុបនៃការលក់ក្នុងខែនេះ។</p>
+        </div>
+
+        <div class="calc-field">
+          <label class="calc-label">តម្លៃលក់នេះរួម VAT ដែរឬទេ?</label>
+          <select v-model="salesIncludeVat" class="calc-select">
+            <option :value="false">មិនរួម VAT</option>
+            <option :value="true">រួម VAT</option>
+          </select>
+          <p class="calc-help">បើរួម VAT ប្រព័ន្ធនឹងដក VAT ចេញជាមុន ដើម្បីរកមូលដ្ឋានលក់សុទ្ធ។</p>
+        </div>
+
+        <div class="calc-field">
+          <label class="calc-label">តម្លៃទិញ (Purchases)</label>
+          <input v-model.number="purchases" class="calc-input" type="number" placeholder="បញ្ចូលតម្លៃទិញសរុប" />
+          <p class="calc-help">បញ្ចូលតម្លៃទិញដែលទាក់ទងនឹងអាជីវកម្ម និងអាចយកជាឥណទាន VAT បាន។</p>
+        </div>
+
+        <div class="calc-field">
+          <label class="calc-label">តម្លៃទិញនេះរួម VAT ដែរឬទេ?</label>
+          <select v-model="purchaseIncludeVat" class="calc-select">
+            <option :value="false">មិនរួម VAT</option>
+            <option :value="true">រួម VAT</option>
+          </select>
+          <p class="calc-help">ជ្រើសស្ថានភាពត្រឹមត្រូវ ដើម្បីគណនា Input VAT credit បានច្បាស់។</p>
         </div>
       </div>
-    </section>
-    <FooterSection />
-  </div>
+    </template>
+
+    <template #results>
+      <div class="calc-result-list">
+        <div class="calc-result-item">
+          <span class="calc-result-label">មូលដ្ឋានលក់សុទ្ធ</span>
+          <strong class="calc-result-value">{{ outputBase.toFixed(2) }}</strong>
+        </div>
+        <div class="calc-result-item">
+          <span class="calc-result-label">មូលដ្ឋានទិញសុទ្ធ</span>
+          <strong class="calc-result-value">{{ inputBase.toFixed(2) }}</strong>
+        </div>
+        <div class="calc-result-item">
+          <span class="calc-result-label">Output VAT</span>
+          <strong class="calc-result-value">{{ outputVat.toFixed(2) }}</strong>
+        </div>
+        <div class="calc-result-item">
+          <span class="calc-result-label">Input VAT</span>
+          <strong class="calc-result-value">{{ inputVat.toFixed(2) }}</strong>
+        </div>
+        <div class="calc-result-item calc-result-item--accent">
+          <span class="calc-result-label">VAT ត្រូវបង់</span>
+          <strong class="calc-result-value">{{ payableVat.toFixed(2) }}</strong>
+        </div>
+        <div class="calc-result-item">
+          <span class="calc-result-label">VAT ឥណទានលើកខែក្រោយ</span>
+          <strong class="calc-result-value">{{ carryForward.toFixed(2) }}</strong>
+        </div>
+      </div>
+    </template>
+  </TaxCalculatorLayout>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import Navbar from '@/components/Navbar.vue'
-import FooterSection from '@/components/FooterSection.vue'
+import TaxCalculatorLayout from '@/components/TaxCalculatorLayout.vue'
 
 const supplyType = ref<'domestic' | 'export'>('domestic')
 const sales = ref(0)
@@ -83,15 +102,27 @@ const purchaseIncludeVat = ref(false)
 const rate = ref(10)
 
 const effectiveRate = computed(() => (supplyType.value === 'export' ? 0 : rate.value))
-const outputBase = computed(() => (salesIncludeVat.value && effectiveRate.value > 0 ? sales.value / (1 + effectiveRate.value / 100) : sales.value))
-const inputBase = computed(() => (purchaseIncludeVat.value && rate.value > 0 ? purchases.value / (1 + rate.value / 100) : purchases.value))
+const outputBase = computed(() =>
+  salesIncludeVat.value && effectiveRate.value > 0 ? sales.value / (1 + effectiveRate.value / 100) : sales.value
+)
+const inputBase = computed(() =>
+  purchaseIncludeVat.value && rate.value > 0 ? purchases.value / (1 + rate.value / 100) : purchases.value
+)
 const outputVat = computed(() => outputBase.value * (effectiveRate.value / 100))
 const inputVat = computed(() => inputBase.value * (rate.value / 100))
 const net = computed(() => outputVat.value - inputVat.value)
 const payableVat = computed(() => (net.value > 0 ? net.value : 0))
 const carryForward = computed(() => (net.value < 0 ? Math.abs(net.value) : 0))
-</script>
 
-<style scoped>
-.wrap{padding:40px 20px}.box{max-width:960px;margin:auto;display:grid;gap:14px}.intro{color:#475569}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{font-weight:700;color:#0f766e}input,select{padding:10px;border:1px solid #99d8cf;border-radius:8px}.help{font-size:12px;color:#64748b;margin:6px 0 0}.result{background:#ecfeff;padding:14px;border-radius:10px;display:grid;gap:6px}@media(max-width:800px){.form-grid{grid-template-columns:1fr}}
-</style>
+const highlights = computed(() => [
+  { label: 'អត្រា Output VAT', value: `${effectiveRate.value}%` },
+  { label: 'VAT ត្រូវបង់', value: payableVat.value.toFixed(2) },
+  { label: 'VAT ឥណទាន', value: carryForward.value.toFixed(2) }
+])
+
+const tips = [
+  'Output VAT គឺ VAT លើការលក់ ចំណែក Input VAT គឺ VAT លើការទិញដែលអាចយកជាឥណទានបាន។',
+  'បើ Input VAT ធំជាង Output VAT លទ្ធផលមិនមែនត្រូវបង់ទេ ប៉ុន្តែអាចលើកជាឥណទានទៅខែក្រោយ។',
+  'សម្រាប់ការនាំចេញ អត្រា VAT ជាទូទៅគឺ 0% តែត្រូវមានឯកសារគាំទ្រត្រឹមត្រូវ។'
+]
+</script>

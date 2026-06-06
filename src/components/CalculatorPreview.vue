@@ -2,7 +2,7 @@
   <section class="calculator-preview">
     <div class="container">
       <div class="section-header">
-        <span class="section-badge">12 Calculators</span>
+        <span class="section-badge">13 Calculators</span>
         <h2>ជ្រើសរើសម៉ាស៊ីនគណនាពន្ធ</h2>
         <p>ចុចលើពន្ធនីមួយៗ ដើម្បីបើកម៉ាស៊ីនគណនាលម្អិត</p>
       </div>
@@ -39,11 +39,12 @@ const category = ref<'all' | 'indirect' | 'income' | 'property'>('all')
 const taxes: TaxCard[] = [
   { slug: 'vat', name: 'អាករលើតម្លៃបន្ថែម (VAT)', summary: 'គណនា Output VAT, Input VAT និង VAT ត្រូវបង់', path: '/tax-calculator/vat', category: 'indirect' },
   { slug: 'salary', name: 'ពន្ធលើប្រាក់បៀវត្ស', summary: 'គណនាពន្ធប្រាក់ខែ Resident/Non-Resident', path: '/tax-calculator/salary', category: 'income' },
-  { slug: 'prepayment', name: 'ពន្ធបង់ជាមុន', summary: 'គណនា 1% លើមូលដ្ឋានគិតពន្ធប្រចាំខែ', path: '/tax-calculator/prepayment', category: 'income' },
+  { slug: 'prepayment', name: 'ពន្ធលើប្រាក់ចំណូលបង់ជាមុន', summary: 'គណនា 1% លើមូលដ្ឋានគិតពន្ធប្រចាំខែ', path: '/tax-calculator/prepayment', category: 'income' },
   { slug: 'withholding', name: 'ពន្ធកាត់ទុក', summary: 'គណនាតាមប្រភេទទូទាត់ និងស្ថានភាពអ្នកទទួលប្រាក់', path: '/tax-calculator/withholding', category: 'income' },
   { slug: 'public-lighting', name: 'អាករសម្រាប់បំភ្លឺសាធារណៈ', summary: 'គណនា PLT អត្រា 5%', path: '/tax-calculator/public-lighting', category: 'indirect' },
   { slug: 'specific', name: 'អាករពិសេស', summary: 'គណនាអាករពិសេសតាមប្រភេទទំនិញ/សេវា', path: '/tax-calculator/specific', category: 'indirect' },
-  { slug: 'corporate-income', name: 'ពន្ធលើប្រាក់ចំណូលសហគ្រាស', summary: 'គណនា TOI 20% និងកាត់កងពន្ធបង់ជាមុន', path: '/tax-calculator/corporate-income', category: 'income' },
+  { slug: 'income-tax', name: 'ពន្ធលើប្រាក់ចំណូលប្រចាំឆ្នាំ', summary: 'គណនាពន្ធតាមជួរ 0% - 20% និងអត្រាពិសេស 30% / 0%', path: '/tax-calculator/corporate-income', category: 'income' },
+  { slug: 'corporate-income', name: 'ពន្ធលើប្រាក់ចំណូលប្រចាំឆ្នាំ', summary: 'គណនាពន្ធតាមជួរ 0% - 20% និងអត្រាពិសេស 30% / 0%', path: '/tax-calculator/corporate-income', category: 'income' },
   { slug: 'patent', name: 'ពន្ធប៉ាតង់', summary: 'គណនាពន្ធប៉ាតង់តាមប្រភេទអ្នកជាប់ពន្ធ', path: '/tax-calculator/patent', category: 'income' },
   { slug: 'property', name: 'ពន្ធលើអចលនទ្រព្យ', summary: 'គណនា 0.1% បន្ទាប់ពីកាត់លើកលែង', path: '/tax-calculator/property', category: 'property' },
   { slug: 'unused-land', name: 'ពន្ធលើដីមិនប្រើប្រាស់', summary: 'គណនាពន្ធតាមតម្លៃដី និងអត្រា', path: '/tax-calculator/unused-land', category: 'property' },

@@ -1,61 +1,19 @@
+
 <template>
   <div class="page">
     <Navbar />
-    <section class="tax-section">
-      <div class="container">
-        <h1>អាករលើតម្លៃបន្ថែម (VAT)</h1>
-        <p class="desc">
-          VAT ជាពន្ធប្រយោលលើការប្រើប្រាស់ ដែលគិតលើការផ្គត់ផ្គង់ទំនិញ និងសេវាកម្ម។
-          បន្ទុកពន្ធចុងក្រោយស្ថិតលើអ្នកប្រើប្រាស់ចុងក្រោយ ខណៈអាជីវកម្មមានតួនាទីប្រមូល និងប្រកាសបង់ពន្ធ។
-        </p>
-
-        <div class="card">
-          <h2>១) និយមន័យសំខាន់</h2>
-          <ul>
-            <li><strong>ធាតុចេញ (Output)</strong>៖ ការលក់ទំនិញ/សេវារបស់អាជីវកម្ម</li>
-            <li><strong>អាករលើធាតុចេញ</strong>៖ VAT ដែលប្រមូលពីអតិថិជន</li>
-            <li><strong>ធាតុចូល (Input)</strong>៖ ការទិញទំនិញ/សេវាសម្រាប់អាជីវកម្ម</li>
-            <li><strong>អាករលើធាតុចូល</strong>៖ VAT ដែលអាជីវកម្មបានបង់ និងអាចដកជាឥណទាន</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h2>២) ការចុះបញ្ជី VAT</h2>
-          <ul>
-            <li>បុគ្គលជាប់ពន្ធដែលធ្វើការផ្គត់ផ្គង់ជាប់ VAT ត្រូវចុះបញ្ជី VAT</li>
-            <li>ត្រូវដាក់តាំងវិញ្ញាបនបត្រចុះបញ្ជី VAT នៅទីតាំងអាជីវកម្ម</li>
-            <li>ត្រូវចេញវិក្កយបត្រពន្ធត្រឹមត្រូវទៅអ្នកទិញ</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h2>៣) ប្រភេទផ្គត់ផ្គង់</h2>
-          <ul>
-            <li>ផ្គត់ផ្គង់ក្នុងស្រុក៖ អត្រាស្តង់ដារ <strong>10%</strong></li>
-            <li>នាំចេញទំនិញ/សេវាកម្មដែលច្បាប់អនុញ្ញាត៖ អត្រា <strong>0%</strong></li>
-            <li>មានប្រភេទផ្គត់ផ្គង់មិនជាប់ VAT ឬមានការលើកលែងតាមបទប្បញ្ញត្តិពាក់ព័ន្ធ</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h2>៤) រូបមន្តគណនា VAT</h2>
-          <p><strong>VAT ត្រូវបង់ = អាករលើធាតុចេញ − អាករលើធាតុចូល</strong></p>
-          <p>
-            ប្រសិនបើអាករលើធាតុចូលលើសអាករលើធាតុចេញ អាចក្លាយជាឥណទាន VAT សម្រាប់ខែបន្ទាប់
-            (ឬស្នើសុំបង្វិលសងតាមលក្ខខណ្ឌច្បាប់)។
-          </p>
-        </div>
-
-        <div class="card">
-          <h2>៥) កាតព្វកិច្ចប្រកាស និងបង់</h2>
-          <ul>
-            <li>ប្រកាស និងបង់ VAT ប្រចាំខែ</li>
-            <li>កាលកំណត់៖ យ៉ាងយឺតត្រឹម <strong>ថ្ងៃទី 20 នៃខែបន្ទាប់</strong></li>
-            <li>ត្រូវរក្សាសៀវភៅទិន្នានុប្បវត្តិទិញ-លក់ និងឯកសារពន្ធឱ្យបានពេញលេញ</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    <TaxLessonLayout
+      :title="title"
+      :intro="intro"
+      :formula="formula"
+      :when-on="whenOn"
+      :when-off="whenOff"
+      :when-to-use="whenToUse"
+      calculator-link="/tax-calculator/vat"
+      calculator-label="បើកម៉ាស៊ីនគណនា VAT"
+      :key-points="keyPoints"
+      :sections="sections"
+    />
     <FooterSection />
   </div>
 </template>
@@ -63,22 +21,67 @@
 <script setup lang="ts">
 import Navbar from '../components/Navbar.vue'
 import FooterSection from '../components/FooterSection.vue'
+import TaxLessonLayout from '../components/TaxLessonLayout.vue'
+
+const title = "អាករលើតម្លៃបន្ថែម (VAT)"
+const intro = "VAT ជាពន្ធប្រយោលលើការប្រើប្រាស់ ដែលអ្នកលក់ប្រមូលពីអតិថិជន ហើយដាក់ប្រកាសជូនរដ្ឋ។ សម្រាប់អ្នករៀនគណនេយ្យ វាជាពន្ធមូលដ្ឋានសំខាន់បំផុតមួយ ព្រោះវាជាប់ទាំងការចេញវិក្កយបត្រ ការរក្សាបញ្ជីទិញ-លក់ និងការកំណត់ output tax និង input tax។"
+const formula = "VAT ត្រូវបង់ = អាករលើធាតុចេញ − អាករលើធាតុចូល"
+const whenOn = "ពេលមានការលក់ ឬផ្គត់ផ្គង់ទំនិញ/សេវាកម្មជាប់ VAT ដោយបុគ្គលជាប់បញ្ជី VAT។"
+const whenOff = "ពេលប្រតិបត្តិការលើកលែង VAT, ករណីអត្រា 0% ឬមិនមាន taxable supply។"
+const whenToUse = "ប្រើពេលចេញវិក្កយបត្រលក់ទំនិញ/សេវា និងពេលរៀបចំប្រកាស VAT ប្រចាំខែ។"
+const keyPoints = [
+  "អត្រាទូទៅ 10% សម្រាប់ការផ្គត់ផ្គង់ក្នុងស្រុក",
+  "0% អាចអនុវត្តលើការនាំចេញដែលច្បាប់អនុញ្ញាត",
+  "ពន្ធត្រូវបង់គណនាពី output tax ដក input tax"
+]
+const sections = [
+  {
+    "title": "១) VAT គឺជាអ្វី?",
+    "paragraphs": [
+      "VAT គឺជាពន្ធលើតម្លៃបន្ថែមក្នុងដំណាក់កាលលក់ទំនិញ និងសេវា។ អាជីវកម្មមិនមែនជាអ្នកទទួលបន្ទុកពន្ធចុងក្រោយទេ តែជាអ្នកប្រមូលពន្ធជំនួសរដ្ឋ។",
+      "អ្នកប្រើប្រាស់ចុងក្រោយគឺជាអ្នកទទួលបន្ទុកពន្ធពិតប្រាកដ។ ដូច្នេះសិស្សគួរយល់ច្បាស់ពីភាពខុសគ្នារវាង output tax, input tax និង net VAT payable។"
+    ]
+  },
+  {
+    "title": "២) ពេលណាពន្ធអនុវត្ត?",
+    "bullets": [
+      "ពេលលក់ទំនិញ ឬផ្តល់សេវាកម្មដែលស្ថិតក្រោម VAT",
+      "ពេលអាជីវកម្មបានចុះបញ្ជី VAT និងចេញវិក្កយបត្រពន្ធ",
+      "ពេលមានការនាំចូលទំនិញដែលត្រូវបញ្ចូល VAT តាមច្បាប់"
+    ]
+  },
+  {
+    "title": "៣) ពេលណាមិនអនុវត្ត?",
+    "bullets": [
+      "ពេលទំនិញ ឬសេវាស្ថិតក្នុងបញ្ជីលើកលែងពន្ធ",
+      "ពេលអត្រា 0% តែប្រតិបត្តិការនៅតែត្រូវរាយការណ៍",
+      "ពេលមូលដ្ឋានជាប់ពន្ធមិនកើតឡើង ឬមិនទាន់ចុះបញ្ជីតាមលក្ខខណ្ឌ"
+    ],
+    "note": "ចំណាំ: អត្រា 0% មិនមានន័យថា មិនចាំបាច់រាយការណ៍ទេ។ សិស្សជាច្រើនច្រឡំចំណុចនេះពេលប្រឡង។"
+  },
+  {
+    "title": "៤) រូបមន្ត និងការគណនា",
+    "paragraphs": [
+      "រូបមន្តមូលដ្ឋានគឺ VAT ត្រូវបង់ = អាករលើធាតុចេញ − អាករលើធាតុចូល។",
+      "បើ output tax ច្រើនជាង input tax អ្នកត្រូវបង់ចំនួនខុសគ្នានោះ។ បើ input tax ច្រើនជាង output tax អាចក្លាយជាឥណទាន VAT តាមលក្ខខណ្ឌច្បាប់។"
+    ]
+  },
+  {
+    "title": "៥) អ្វីដែលត្រូវចងចាំសម្រាប់ប្រឡង",
+    "bullets": [
+      "អត្រាស្តង់ដារ 10%",
+      "គណនាជាប្រចាំខែ",
+      "ដាក់ប្រកាសយ៉ាងយឺតត្រឹមថ្ងៃទី 20 នៃខែបន្ទាប់",
+      "ត្រូវមានវិក្កយបត្រត្រឹមត្រូវ និងបញ្ជីទិញ-លក់ច្បាស់លាស់"
+    ]
+  }
+]
 </script>
 
 <style scoped>
-.page { width: 100%; overflow-x: hidden; background: #ffffff; }
-.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-.tax-section { padding: 56px 0; }
-h1 { color: #0f766e; font-size: 34px; margin-bottom: 14px; }
-.desc { color: #334155; line-height: 1.9; margin-bottom: 14px; }
-h2 { color: #0f172a; margin: 0 0 10px; font-size: 24px; }
-p, li { color: #334155; line-height: 1.9; }
-ul { margin: 0; padding-left: 20px; }
-.card {
-  background: #f8fffd;
-  border: 1px solid rgba(20, 184, 166, 0.2);
-  border-radius: 14px;
-  padding: 18px 20px;
-  margin-top: 16px;
+.page {
+  width: 100%;
+  overflow-x: hidden;
+  background: #ffffff;
 }
 </style>
