@@ -17,8 +17,8 @@
 
         <div class="calc-field">
           <label class="calc-label">តម្លៃលើកលែង</label>
-          <input v-model.number="exemption" class="calc-input" type="number" placeholder="បញ្ចូលតម្លៃលើកលែង" />
-          <p class="calc-help">បញ្ចូលតម្លៃដែលអាចកាត់ចេញពីមូលដ្ឋានជាប់ពន្ធបាន។</p>
+          <input class="calc-input calc-input--readonly" type="text" :value="fixedExemptionLabel" readonly />
+          <p class="calc-help">តម្លៃលើកលែងត្រូវបានកំណត់ថេរ ហើយមិនអាចកែប្រែបានទេ។</p>
         </div>
       </div>
     </template>
@@ -47,20 +47,30 @@ import { computed, ref } from 'vue'
 import TaxCalculatorLayout from '@/components/TaxCalculatorLayout.vue'
 
 const value = ref(0)
-const exemption = ref(0)
+const fixedExemption = 100_000_000
+const fixedExemptionLabel = '100,000,000 riel'
 
-const taxable = computed(() => Math.max(0, value.value - exemption.value))
+const taxable = computed(() => Math.max(0, value.value - fixedExemption))
 const tax = computed(() => taxable.value * 0.001)
 
 const highlights = computed(() => [
   { label: 'តម្លៃសរុប', value: value.value.toFixed(2) },
+  { label: 'តម្លៃលើកលែងថេរ', value: fixedExemptionLabel },
   { label: 'មូលដ្ឋានជាប់ពន្ធ', value: taxable.value.toFixed(2) },
   { label: 'ពន្ធត្រូវបង់', value: tax.value.toFixed(2) }
 ])
 
 const tips = [
-  'ត្រូវបញ្ចូលតម្លៃលើកលែងឱ្យត្រឹមត្រូវ មុននឹងគណនាពន្ធ។',
+  'តម្លៃលើកលែងត្រូវបានកំណត់ថេរ 100,000,000 riel ក្នុងម៉ូឌុលនេះ។',
   'អត្រាគំរូក្នុងម៉ូឌុលនេះគឺ 0.1% លើមូលដ្ឋានក្រោយកាត់ចេញ។',
-  'បើតម្លៃលើកលែងធំជាងតម្លៃអចលនទ្រព្យ លទ្ធផលមូលដ្ឋានជាប់ពន្ធនឹងស្មើសូន្យ។'
+  'បើតម្លៃអចលនទ្រព្យតិចជាង 100,000,000 riel លទ្ធផលមូលដ្ឋានជាប់ពន្ធនឹងស្មើសូន្យ។'
 ]
 </script>
+
+<style scoped>
+.calc-input--readonly {
+  background: #f8fafc;
+  color: #0f172a;
+  cursor: not-allowed;
+}
+</style>
