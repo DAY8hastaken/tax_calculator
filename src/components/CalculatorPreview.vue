@@ -44,7 +44,6 @@ const taxes: TaxCard[] = [
   { slug: 'public-lighting', name: 'អាករសម្រាប់បំភ្លឺសាធារណៈ', summary: 'គណនា PLT អត្រា 5%', path: '/tax-calculator/public-lighting', category: 'indirect' },
   { slug: 'specific', name: 'អាករពិសេស', summary: 'គណនាអាករពិសេសតាមប្រភេទទំនិញ/សេវា', path: '/tax-calculator/specific', category: 'indirect' },
   { slug: 'income-tax', name: 'ពន្ធលើប្រាក់ចំណូលប្រចាំឆ្នាំ', summary: 'គណនាពន្ធតាមជួរ 0% - 20% និងអត្រាពិសេស 30% / 0%', path: '/tax-calculator/corporate-income', category: 'income' },
-  { slug: 'corporate-income', name: 'ពន្ធលើប្រាក់ចំណូលប្រចាំឆ្នាំ', summary: 'គណនាពន្ធតាមជួរ 0% - 20% និងអត្រាពិសេស 30% / 0%', path: '/tax-calculator/corporate-income', category: 'income' },
   { slug: 'patent', name: 'ពន្ធប៉ាតង់', summary: 'គណនាពន្ធប៉ាតង់តាមប្រភេទអ្នកជាប់ពន្ធ', path: '/tax-calculator/patent', category: 'income' },
   { slug: 'property', name: 'ពន្ធលើអចលនទ្រព្យ', summary: 'គណនា 0.1% បន្ទាប់ពីកាត់លើកលែង', path: '/tax-calculator/property', category: 'property' },
   { slug: 'unused-land', name: 'ពន្ធលើដីមិនប្រើប្រាស់', summary: 'គណនាពន្ធតាមតម្លៃដី និងអត្រា', path: '/tax-calculator/unused-land', category: 'property' },

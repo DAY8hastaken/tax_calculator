@@ -2,7 +2,7 @@
   <TaxCalculatorLayout
     badge="Accommodation Tax Calculator"
     title="ម៉ាស៊ីនគណនាអាករលើការស្នាក់នៅ"
-    intro="គណនាអាករលើការស្នាក់នៅអត្រា 2% ពីចំណូលបន្ទប់ និងបន្ទុកសេវាដែលទាក់ទងនឹងការស្នាក់នៅ។"
+    intro="គណនាអាករលើការស្នាក់នៅអត្រា 2% ពីចំណូលបន្ទប់ស្នាក់នៅ។ បន្ទុកសេវា (Service Charge) ត្រូវបែងចែកផ្សេង ប្រសិនបើមិនមែនជាផ្នែកនៃថ្លៃបន្ទប់។"
     formula="Accommodation Tax = មូលដ្ឋានគិតអាករ × 2%"
     :highlights="highlights"
     :tips="tips"
@@ -13,12 +13,6 @@
           <label class="calc-label">ចំណូលបន្ទប់ស្នាក់នៅ</label>
           <input v-model.number="room" class="calc-input" type="number" placeholder="បញ្ចូលចំណូលបន្ទប់ស្នាក់នៅ" />
           <p class="calc-help">បញ្ចូលតែចំណូលពីការស្នាក់នៅប៉ុណ្ណោះ។</p>
-        </div>
-
-        <div class="calc-field">
-          <label class="calc-label">បន្ទុកសេវា (Service Charge)</label>
-          <input v-model.number="service" class="calc-input" type="number" placeholder="បញ្ចូលបន្ទុកសេវា" />
-          <p class="calc-help">បញ្ចូលបន្ទុកសេវាដែលភ្ជាប់ជាមួយសេវាស្នាក់នៅ។</p>
         </div>
 
         <div class="calc-field calc-field--full">
@@ -56,24 +50,22 @@ import { computed, ref } from 'vue'
 import TaxCalculatorLayout from '@/components/TaxCalculatorLayout.vue'
 
 const room = ref(0)
-const service = ref(0)
 const inc = ref(true)
 
 const base = computed(() => {
-  const gross = room.value + service.value
-  return inc.value ? gross / (1.1 * 1.02) : gross
+  return inc.value ? room.value / (1.1 * 1.02) : room.value
 })
 
 const tax = computed(() => base.value * 0.02)
 
 const highlights = computed(() => [
-  { label: 'ចំណូលសរុប', value: (room.value + service.value).toFixed(2) },
+  { label: 'ចំណូលបន្ទប់', value: room.value.toFixed(2) },
   { label: 'មូលដ្ឋានគិតអាករ', value: base.value.toFixed(2) },
   { label: 'អាករត្រូវបង់', value: tax.value.toFixed(2) }
 ])
 
 const tips = [
-  'អាករលើការស្នាក់នៅគិតលើចំណូលពីសេវាស្នាក់នៅ និងបន្ទុកសេវាដែលពាក់ព័ន្ធ។',
+  'ក្នុងម៉ូឌុលនេះ គណនាលើចំណូលបន្ទប់ស្នាក់នៅជាមូលដ្ឋាន។ បន្ទុកសេវា (Service Charge) មិនបានបូកក្នុង tax base ទេ។',
   'បើតម្លៃរួម VAT និង Accommodation Tax ត្រូវបំបែកចេញមុនសិន។',
   'ចំណូលពីអាហារដែលមិនទាក់ទងនឹងការស្នាក់នៅ មិនគួរបញ្ចូលក្នុងម៉ូឌុលនេះទេ។'
 ]
