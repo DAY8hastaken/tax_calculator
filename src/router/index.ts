@@ -7,6 +7,7 @@ import TaxPayer from '@/pages/TaxPayer.vue'
 import TaxTypes from '@/pages/TaxTypes.vue'
 import VatTax from '@/pages/VatTax.vue'
 import SalaryTax from '@/pages/SalaryTax.vue'
+import FringeBenefitTax from '@/pages/FringeBenefitTax.vue'
 import BusinessTax from '@/pages/BusinessTax.vue'
 import PrepaymentTax from '@/pages/PrepaymentTax.vue'
 import PublicLightingTax from '@/pages/PublicLightingTax.vue'
@@ -20,6 +21,7 @@ import RegistrationTax from '@/pages/RegistrationTax.vue'
 import AccommodationTax from '@/pages/AccommodationTax.vue'
 import VatCalculatorPage from '@/pages/calculators/VatCalculatorPage.vue'
 import SalaryCalculatorPage from '@/pages/calculators/SalaryCalculatorPage.vue'
+import FringeBenefitCalculatorPage from '@/pages/calculators/FringeBenefitCalculatorPage.vue'
 import PrepaymentCalculatorPage from '@/pages/calculators/PrepaymentCalculatorPage.vue'
 import WithholdingCalculatorPage from '@/pages/calculators/WithholdingCalculatorPage.vue'
 import PublicLightingCalculatorPage from '@/pages/calculators/PublicLightingCalculatorPage.vue'
@@ -67,6 +69,11 @@ const routes = [
     path: '/tax-types/salary',
     name: 'SalaryTax',
     component: SalaryTax
+  },
+  {
+    path: '/tax-types/fringe-benefit',
+    name: 'FringeBenefitTax',
+    component: FringeBenefitTax
   },
   {
     path: '/tax-types/business',
@@ -137,6 +144,11 @@ const routes = [
     path: '/tax-calculator/salary',
     name: 'SalaryCalculatorPage',
     component: SalaryCalculatorPage
+  },
+  {
+    path: '/tax-calculator/fringe-benefit',
+    name: 'FringeBenefitCalculatorPage',
+    component: FringeBenefitCalculatorPage
   },
   {
     path: '/tax-calculator/prepayment',

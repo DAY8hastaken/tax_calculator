@@ -39,6 +39,7 @@ const category = ref<'all' | 'indirect' | 'income' | 'property'>('all')
 const taxes: TaxCard[] = [
   { slug: 'vat', name: 'អាករលើតម្លៃបន្ថែម (VAT)', summary: 'គណនា Output VAT, Input VAT និង VAT ត្រូវបង់', path: '/tax-calculator/vat', category: 'indirect' },
   { slug: 'salary', name: 'ពន្ធលើប្រាក់បៀវត្ស', summary: 'គណនាពន្ធប្រាក់ខែ Resident/Non-Resident', path: '/tax-calculator/salary', category: 'income' },
+  { slug: 'fringe-benefit', name: 'ពន្ធលើអត្ថប្រយោជន៍បន្ថែម', summary: 'គណនាពន្ធ 20% លើ fringe benefits ដាច់ដោយឡែក', path: '/tax-calculator/fringe-benefit', category: 'income' },
   { slug: 'prepayment', name: 'ពន្ធលើប្រាក់ចំណូលបង់ជាមុន', summary: 'គណនា 1% លើមូលដ្ឋានគិតពន្ធប្រចាំខែ', path: '/tax-calculator/prepayment', category: 'income' },
   { slug: 'withholding', name: 'ពន្ធកាត់ទុក', summary: 'គណនាតាមប្រភេទទូទាត់ និងស្ថានភាពអ្នកទទួលប្រាក់', path: '/tax-calculator/withholding', category: 'income' },
   { slug: 'public-lighting', name: 'អាករសម្រាប់បំភ្លឺសាធារណៈ', summary: 'គណនា PLT អត្រា 5%', path: '/tax-calculator/public-lighting', category: 'indirect' },

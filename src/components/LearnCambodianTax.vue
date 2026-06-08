@@ -54,6 +54,7 @@ import {
   Receipt,
   ScrollText,
   Scissors,
+  Sparkles,
   Tags,
   Wallet,
   Wheat,
@@ -86,6 +87,15 @@ const taxTypes = [
     rate: '0% - 20%',
     appliesTo: 'ប្រាក់ខែ និងប្រាក់ឈ្នួល',
     path: '/tax-types/salary'
+  },
+  {
+    icon: Sparkles,
+    title: 'Fringe Benefit Tax',
+    khmerTitle: 'ពន្ធលើអត្ថប្រយោជន៍បន្ថែម',
+    description: 'ពន្ធលើអត្ថប្រយោជន៍បន្ថែមអនុវត្តលើ benefit ដែលនិយោជកផ្តល់ឱ្យនិយោជិត ដោយគណនាដាច់ដោយឡែកពីប្រាក់បៀវត្ស។',
+    rate: '20%',
+    appliesTo: 'Benefit ពីនិយោជក',
+    path: '/tax-types/fringe-benefit'
   },
   {
     icon: Hourglass,

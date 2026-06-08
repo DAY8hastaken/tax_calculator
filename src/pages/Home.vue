@@ -15,7 +15,7 @@
 
         <div class="hub-metrics">
           <div class="metric-card">
-            <h3>14+</h3>
+            <h3>15+</h3>
             <p>ប្រភេទពន្ធសំខាន់</p>
           </div>
           <div class="metric-card">
@@ -44,6 +44,12 @@
           <RouterLink class="hub-card" to="/tax-types/salary">
             <h3>មេរៀនពន្ធបៀវត្ស</h3>
             <p>យល់អំពីនិវាសនជន/អនិវាសនជន ការកាត់បន្ថយទាយជ្ជទាន និងអត្រាពន្ធតាមកម្រិតប្រាក់ខែ។</p>
+            <span>មើលលម្អិត →</span>
+          </RouterLink>
+
+          <RouterLink class="hub-card" to="/tax-types/fringe-benefit">
+            <h3>មេរៀនអត្ថប្រយោជន៍បន្ថែម</h3>
+            <p>សិក្សាអត្ថប្រយោជន៍បន្ថែមដែលជាប់ពន្ធ 20% និងវិធីបែងចែកចេញពីប្រាក់បៀវត្សធម្មតា។</p>
             <span>មើលលម្អិត →</span>
           </RouterLink>
 
